@@ -1,36 +1,32 @@
 "use client";
 
-/**
- * GLBModelViewer.tsx - High-Quality GLB Sports Car Model Viewer
- * 
- * Features:
- * - Loads GLB models from public CDN
- * - Scroll-controlled rotation
- * - Realistic lighting and reflections
- * - Mobile-responsive
- * - Performance optimized
- */
-
-"use client";
-
-import { useEffect, useRef, useState } from 'react';
+import { Suspense, useEffect, useMemo, useRef, useState } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { useGLTF, PresentationControls, Environment, ContactShadows } from '@react-three/drei';
-import { useScroll } from 'framer-motion';
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
+import * as THREE from 'three';
 
 gsap.registerPlugin(ScrollTrigger);
 
-// Model component
 function Model({ url }: { url: string }) {
-  const group = useRef<any>(null);
+  const group = useRef<THREE.Group>(null);
   const { scene } = useGLTF(url);
   const { viewport } = useThree();
   const scrollProgress = useRef(0);
 
+  const model = useMemo(() => {
+    const clonedScene = scene.clone();
+    clonedScene.traverse((child: any) => {
+      if (child.isMesh) {
+        child.castShadow = true;
+        child.receiveShadow = true;
+      }
+    });
+    return clonedScene;
+  }, [scene]);
+
   useEffect(() => {
-    // Scroll trigger for rotation
     const trigger = ScrollTrigger.create({
       onUpdate: (self) => {
         scrollProgress.current = self.getVelocity() / 300;
@@ -43,80 +39,84 @@ function Model({ url }: { url: string }) {
   }, []);
 
   useFrame(() => {
-    if (group.current) {
-      // Smooth rotation based on scroll velocity
-      group.current.rotation.y += scrollProgress.current * 0.01;
-      scrollProgress.current *= 0.95; // Damping
-    }
+    if (!group.current) return;
+
+    group.current.rotation.y += scrollProgress.current * 0.012;
+    scrollProgress.current *= 0.95;
   });
 
   return (
-    <group ref={group} scale={viewport.width < 600 ? 1.2 : 1.5}>
-      <primitive object={scene} />
+    <group
+      ref={group}
+      scale={viewport.width < 600 ? 0.9 : viewport.width < 900 ? 1.05 : 1.35}
+      position={[0, -0.15, 0]}
+    >
+      <primitive object={model} />
     </group>
   );
 }
 
 export function GLBModelViewer() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [modelUrl, setModelUrl] = useState<string>('');
-  const [isLoading, setIsLoading] = useState(true);
+  const [webglReady, setWebglReady] = useState(true);
+  const [modelUrl] = useState('/assets/Hoodie.glb');
 
   useEffect(() => {
-    // Load a local GLB model asset from the project public folder
-    setModelUrl('/assets/Hoodie.glb');
-    setIsLoading(false);
+    try {
+      const canvas = document.createElement('canvas');
+      const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+      if (!gl) {
+        setWebglReady(false);
+      }
+    } catch {
+      setWebglReady(false);
+    }
   }, []);
 
-  if (isLoading) {
+  if (!webglReady) {
     return (
-      <div className="w-full h-96 flex items-center justify-center bg-gradient-to-b from-black to-purple-900/20 rounded-lg">
+      <div className="flex h-full w-full items-center justify-center bg-[radial-gradient(circle_at_top,_#22073c,_#05050a)] text-cyan-300">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-cyan-400 mx-auto mb-4"></div>
-          <p className="text-cyan-400 font-mono">Loading 3D Model...</p>
+          <p className="text-sm uppercase tracking-[0.4em] text-cyan-300/80">3D preview unavailable</p>
+          <p className="mt-2 text-xs text-cyan-100/70">The browser could not initialize WebGL for the hero canvas.</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div
-      ref={containerRef}
-      className="w-full h-full rounded-lg overflow-hidden border border-cyan-400/20 shadow-2xl shadow-cyan-400/10"
-    >
+    <div className="h-full w-full overflow-hidden">
       <Canvas
-        camera={{ position: [0, 0, 4], fov: 50 }}
+        camera={{ position: [0, 0, 4], fov: 42 }}
+        dpr={[1, 1.5]}
+        shadows
+        tabIndex={-1}
+        gl={{ antialias: true, alpha: true, powerPreference: 'high-performance' }}
         style={{ width: '100%', height: '100%', background: 'linear-gradient(135deg, #0a0a0a 0%, #1a0033 100%)' }}
+        onCreated={(state) => {
+          state.gl.setClearColor('#09010f');
+          state.gl.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
+          state.gl.domElement.tabIndex = -1;
+          state.gl.domElement.style.border = 'none';
+          state.gl.domElement.style.outline = 'none';
+          state.gl.domElement.style.boxShadow = 'none';
+        }}
       >
-        {modelUrl && (
-          <>
-            <PresentationControls
-              speed={1.5}
-              global
-              zoom={1}
-              rotation={[0, 0, 0]}
-            >
-              <Model url={modelUrl} />
-            </PresentationControls>
-            
-            {/* Lighting */}
-            <ambientLight intensity={0.6} />
-            <directionalLight position={[10, 10, 5]} intensity={1.2} castShadow />
-            <pointLight position={[-10, -10, -5]} intensity={0.5} color="#00c8ff" />
-            <pointLight position={[10, -10, -5]} intensity={0.5} color="#7c3aed" />
-            
-            {/* Environment */}
-            <Environment preset="studio" />
-            
-            {/* Shadow */}
-            <ContactShadows
-              position={[0, -1.4, 0]}
-              opacity={0.4}
-              scale={10}
-              blur={2.5}
-            />
-          </>
-        )}
+        <Suspense fallback={null}>
+          <PresentationControls speed={1.5} global zoom={1} rotation={[0, 0, 0]}>
+            <Model url={modelUrl} />
+          </PresentationControls>
+
+          <ambientLight intensity={0.9} />
+          <hemisphereLight intensity={0.8} color="#c084fc" groundColor="#05060a" />
+          <directionalLight position={[10, 12, 6]} intensity={1.6} castShadow />
+          <spotLight position={[-6, 10, 10]} angle={0.4} penumbra={1} intensity={2.4} color="#00c8ff" />
+          <pointLight position={[-12, -5, -5]} intensity={0.8} color="#00c8ff" />
+          <pointLight position={[12, -6, -5]} intensity={0.8} color="#7c3aed" />
+
+          <Environment preset="city" />
+
+          <ContactShadows position={[0, -1.45, 0]} opacity={0.45} scale={12} blur={2.5} />
+        </Suspense>
       </Canvas>
     </div>
   );
