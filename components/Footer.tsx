@@ -14,10 +14,11 @@ export function Footer() {
 
   return (
     <footer className="footer">
+      <div className="footer-grid-glow footer-grid-glow-a" />
+      <div className="footer-grid-glow footer-grid-glow-b" />
+
       <div className="footer-container">
-        {/* Footer Content */}
         <div className="footer-content">
-          {/* Brand Section */}
           <motion.div
             className="footer-brand"
             initial={{ opacity: 0, y: 20 }}
@@ -27,10 +28,9 @@ export function Footer() {
           >
             <div className="footer-logo">RS</div>
             <h3>Red Shadow Designs</h3>
-            <p>Premium 3D engineering and design solutions</p>
+            <p>Premium 3D engineering and design solutions for ambitious next-generation brands.</p>
           </motion.div>
 
-          {/* Quick Links */}
           <motion.div
             className="footer-links"
             initial={{ opacity: 0, y: 20 }}
@@ -47,7 +47,6 @@ export function Footer() {
             </ul>
           </motion.div>
 
-          {/* Services */}
           <motion.div
             className="footer-links"
             initial={{ opacity: 0, y: 20 }}
@@ -55,7 +54,7 @@ export function Footer() {
             transition={{ duration: 0.6, delay: 0.2 }}
             viewport={{ once: true }}
           >
-            <h4>Services</h4>
+            <h4>Core Services</h4>
             <ul>
               <li><a href="/services">CAD Design</a></li>
               <li><a href="/services">3D Rendering</a></li>
@@ -64,7 +63,6 @@ export function Footer() {
             </ul>
           </motion.div>
 
-          {/* Social Links */}
           <motion.div
             className="footer-social"
             initial={{ opacity: 0, y: 20 }}
@@ -82,7 +80,6 @@ export function Footer() {
           </motion.div>
         </div>
 
-        {/* Footer Bottom */}
         <div className="footer-bottom">
           <p>&copy; {currentYear} Red Shadow Designs. All rights reserved.</p>
           <div className="footer-legal">

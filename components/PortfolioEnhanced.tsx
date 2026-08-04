@@ -78,59 +78,35 @@ export function PortfolioEnhanced() {
   useEffect(() => {
     if (!sectionRef.current || !horizontalRef.current) return;
 
-    const horizontalWidth = horizontalRef.current.scrollWidth;
-    const windowWidth = window.innerWidth;
-    const scrollAmount = horizontalWidth - windowWidth;
-
-    // Horizontal Scroll with Pinning
     const ctx = gsap.context(() => {
-      // Background Parallax
       if (bgRef.current) {
         gsap.to(bgRef.current, {
-          y: '20%',
+          y: '18%',
           ease: 'none',
           scrollTrigger: {
             trigger: sectionRef.current,
             start: 'top bottom',
             end: 'bottom top',
             scrub: true,
-          }
+          },
         });
       }
 
-      // Horizontal Movement
-      gsap.to(horizontalRef.current, {
-        x: -scrollAmount,
+      const track = horizontalRef.current;
+      const totalWidth = track?.scrollWidth ?? 0;
+      const visibleWidth = window.innerWidth;
+      const distance = Math.max(totalWidth - visibleWidth * 0.72, 0);
+
+      gsap.to(track, {
+        x: () => -distance,
         ease: 'none',
         scrollTrigger: {
           trigger: sectionRef.current,
           start: 'top top',
-          end: `+=${scrollAmount}`,
-          pin: true,
+          end: `+=${Math.max(distance + 200, 500)}`,
           scrub: 1,
           invalidateOnRefresh: true,
-        }
-      });
-
-      // Card Zoom Animations
-      const cards = horizontalRef.current?.querySelectorAll('.portfolio-item') ?? [];
-      cards.forEach((card) => {
-        gsap.fromTo(card, 
-          { scale: 0.8, opacity: 0.5 },
-          { 
-            scale: 1, 
-            opacity: 1,
-            ease: 'power2.out',
-            scrollTrigger: {
-              trigger: card,
-              containerAnimation: gsap.getById('horizontalScroll'), // This is tricky with pinning, simpler to use containerAnimation if possible
-              start: 'left 80%',
-              end: 'left 50%',
-              scrub: true,
-              // We'll use a simpler approach since containerAnimation is complex to set up here
-            }
-          }
-        );
+        },
       });
     }, sectionRef);
 
@@ -139,7 +115,6 @@ export function PortfolioEnhanced() {
 
   return (
     <section ref={sectionRef} id="portfolio" className="portfolio-section-wrapper">
-      {/* Background Parallax Image */}
       <div ref={bgRef} className="portfolio-parallax-bg">
         <img src="/assets/images/backgrounds/studio-bg.jpg" alt="Background" />
         <div className="portfolio-bg-overlay"></div>
@@ -154,18 +129,18 @@ export function PortfolioEnhanced() {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
+            <div className="portfolio-pill">Immersive showcases</div>
             <h2 className="portfolio-title">Featured Projects</h2>
-            <p className="portfolio-subtitle">Scroll to explore our engineering excellence</p>
+            <p className="portfolio-subtitle">Scroll to explore our engineering excellence through cinematic product stories.</p>
           </motion.div>
         </div>
 
-        {/* Horizontal Scroll Container */}
         <div ref={horizontalRef} className="portfolio-horizontal-container">
           {portfolioItems.map((item) => (
             <div key={item.id} className="portfolio-item-wrapper">
-              <motion.div 
+              <motion.div
                 className="portfolio-item glass-card"
-                whileHover={{ scale: 1.02, transition: { duration: 0.3 } }}
+                whileHover={{ y: -10, scale: 1.015, transition: { duration: 0.3 } }}
               >
                 <div className="portfolio-item-image-box">
                   <img src={item.image} alt={item.title} className="portfolio-item-img" />

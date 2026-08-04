@@ -64,14 +64,15 @@ export function ContactEnhanced() {
 
   return (
     <section ref={sectionRef} id="contact" className="contact-section-wrapper">
-      {/* Background Parallax Image */}
       <div ref={bgRef} className="contact-parallax-bg">
         <img src="/assets/images/backgrounds/finalcta-bg.jpg" alt="Background" />
         <div className="contact-bg-overlay"></div>
       </div>
 
+      <div className="contact-grid-orbit contact-grid-orbit-a" />
+      <div className="contact-grid-orbit contact-grid-orbit-b" />
+
       <div className="contact-content-container">
-        {/* Header */}
         <motion.div
           className="contact-header"
           initial={{ opacity: 0, y: 30 }}
@@ -79,15 +80,15 @@ export function ContactEnhanced() {
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
         >
+          <div className="contact-pill">Launch your next digital prototype</div>
           <h2 className="contact-title">Get In Touch</h2>
           <p className="contact-subtitle">
-            Let's discuss your next engineering breakthrough
+            Let’s wire together a cinematic product vision, a polished prototype, or a production-ready design system.
           </p>
           <div className="contact-header-accent"></div>
         </motion.div>
 
         <div className="contact-grid">
-          {/* Contact Info */}
           <motion.div
             className="contact-info"
             initial={{ opacity: 0, x: -30 }}
@@ -96,38 +97,56 @@ export function ContactEnhanced() {
             viewport={{ once: true }}
           >
             <div className="info-card glass-card">
+              <div className="contact-visual-panel">
+                <div className="contact-visual-ring" />
+                <div className="contact-visual-copy">
+                  <span className="contact-visual-label">Availability</span>
+                  <strong>Booked for premium visual launches</strong>
+                </div>
+              </div>
+
+              <div className="contact-mini-grid">
+                <div className="contact-mini-card">
+                  <span>Projects</span>
+                  <strong>140+</strong>
+                </div>
+                <div className="contact-mini-card">
+                  <span>Delivery</span>
+                  <strong>4–8 days</strong>
+                </div>
+              </div>
+
               <div className="info-item">
                 <div className="info-icon">📍</div>
                 <div className="info-text">
                   <h4>Location</h4>
-                  <p>123 Future Tech Way, Silicon Valley, CA</p>
+                  <p>Silicon Valley, CA</p>
                 </div>
               </div>
               <div className="info-item">
                 <div className="info-icon">📧</div>
                 <div className="info-text">
                   <h4>Email</h4>
-                  <p>contact@redshadowdesigns.com</p>
+                  <a href="mailto:contact@redshadowdesigns.com">contact@redshadowdesigns.com</a>
                 </div>
               </div>
               <div className="info-item">
                 <div className="info-icon">📱</div>
                 <div className="info-text">
                   <h4>Phone</h4>
-                  <p>+1 (555) 123-4567</p>
+                  <a href="tel:+15551234567">+1 (555) 123-4567</a>
                 </div>
               </div>
-              
+
               <div className="social-links">
-                <div className="social-icon">𝕏</div>
-                <div className="social-icon">📸</div>
-                <div className="social-icon">💼</div>
-                <div className="social-icon">🐙</div>
+                <a href="#" className="social-icon" title="X">𝕏</a>
+                <a href="#" className="social-icon" title="Instagram">📸</a>
+                <a href="#" className="social-icon" title="LinkedIn">💼</a>
+                <a href="#" className="social-icon" title="GitHub">🐙</a>
               </div>
             </div>
           </motion.div>
 
-          {/* Contact Form */}
           <motion.div
             className="contact-form-container"
             initial={{ opacity: 0, x: 30 }}
@@ -136,30 +155,39 @@ export function ContactEnhanced() {
             viewport={{ once: true }}
           >
             <form onSubmit={handleSubmit} className="contact-form glass-strong">
-              <div className="form-group">
-                <input
-                  type="text"
-                  name="name"
-                  placeholder="Your Name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  required
-                  className="glass-input"
-                />
+              <div className="form-row">
+                <div className="form-group">
+                  <label htmlFor="name">Name</label>
+                  <input
+                    id="name"
+                    type="text"
+                    name="name"
+                    placeholder="Your Name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    required
+                    className="glass-input"
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="email">Email</label>
+                  <input
+                    id="email"
+                    type="email"
+                    name="email"
+                    placeholder="Your Email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    required
+                    className="glass-input"
+                  />
+                </div>
               </div>
+
               <div className="form-group">
+                <label htmlFor="subject">Subject</label>
                 <input
-                  type="email"
-                  name="email"
-                  placeholder="Your Email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                  className="glass-input"
-                />
-              </div>
-              <div className="form-group">
-                <input
+                  id="subject"
                   type="text"
                   name="subject"
                   placeholder="Subject"
@@ -169,21 +197,28 @@ export function ContactEnhanced() {
                   className="glass-input"
                 />
               </div>
+
               <div className="form-group">
+                <label htmlFor="message">Message</label>
                 <textarea
+                  id="message"
                   name="message"
-                  placeholder="Your Message"
-                  rows={5}
+                  placeholder="Tell us about your project..."
+                  rows={6}
                   value={formData.message}
                   onChange={handleChange}
                   required
                   className="glass-input"
                 ></textarea>
               </div>
-              <button type="submit" className="glass-button-lg w-full">
-                Send Message
-                <span className="button-glow"></span>
-              </button>
+
+              <div className="contact-form-actions">
+                <button type="submit" className="glass-button-lg w-full">
+                  Send Message
+                  <span className="button-glow"></span>
+                </button>
+                <p className="contact-form-note">Response in under 24 hours for qualified inquiries.</p>
+              </div>
             </form>
           </motion.div>
         </div>

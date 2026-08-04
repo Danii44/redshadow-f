@@ -37,6 +37,19 @@ const reviews = [
   },
 ];
 
+const softwareStack = [
+  'Blender',
+  'Cinema 4D',
+  'Substance 3D',
+  'Unreal Engine',
+  'Autodesk Maya',
+  'ZBrush',
+  'After Effects',
+  'Adobe Dimension',
+  'Houdini',
+  'Figma',
+];
+
 export function ReviewsSection() {
   const [active, setActive] = useState(0);
   const count = reviews.length;
@@ -48,8 +61,6 @@ export function ReviewsSection() {
     return () => window.clearInterval(interval);
   }, [count]);
 
-  const activeReview = reviews[active];
-
   return (
     <section className="reviews-section">
       <div className="reviews-shell glass-strong">
@@ -60,24 +71,41 @@ export function ReviewsSection() {
         />
 
         <div className="reviews-header">
-          <h2>What clients say</h2>
-          <p>Trusted by teams who want cinematic 3D storytelling and premium product visualization.</p>
+          <div className="reviews-pill">Client signal</div>
+          <h2>Trusted by ambitious teams</h2>
+          <p>Creative founders, product teams, and brand builders choose us when they need memorable 3D storytelling that feels premium.</p>
         </div>
 
         <div className="reviews-carousel-shell">
-          <motion.article
-            key={activeReview.id}
-            className="review-card is-active"
-            initial={{ opacity: 0, y: 20, scale: 0.96 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ duration: 0.6, ease: 'easeOut' }}
-          >
-            <p className="review-quote">“{activeReview.quote}”</p>
-            <div className="review-meta">
-              <span className="review-name">{activeReview.name}</span>
-              <span className="review-role">{activeReview.role}</span>
-            </div>
-          </motion.article>
+          <div className="reviews-stage">
+            {reviews.map((review, index) => {
+              const isActive = index === active;
+              const isPrev = index === (active - 1 + count) % count;
+              const isNext = index === (active + 1) % count;
+
+              return (
+                <motion.article
+                  key={review.id}
+                  className={`review-card ${isActive ? 'is-active' : ''} ${isPrev ? 'is-prev' : ''} ${isNext ? 'is-next' : ''}`}
+                  initial={{ opacity: 0, y: 26, scale: 0.96 }}
+                  animate={{
+                    opacity: isActive || isPrev || isNext ? 1 : 0,
+                    y: isActive ? 0 : isPrev ? -20 : 20,
+                    scale: isActive ? 1 : 0.97,
+                    x: isActive ? 0 : isPrev ? -24 : 24,
+                  }}
+                  transition={{ duration: 0.6, ease: 'easeOut' }}
+                >
+                  <div className="review-ribbon">Client</div>
+                  <p className="review-quote">“{review.quote}”</p>
+                  <div className="review-meta">
+                    <span className="review-name">{review.name}</span>
+                    <span className="review-role">{review.role}</span>
+                  </div>
+                </motion.article>
+              );
+            })}
+          </div>
         </div>
 
         <div className="reviews-controls">
@@ -105,6 +133,14 @@ export function ReviewsSection() {
           >
             ›
           </button>
+        </div>
+
+        <div className="reviews-marquee-wrap" aria-hidden="true">
+          <div className="reviews-marquee-track">
+            {[...softwareStack, ...softwareStack].map((tool, index) => (
+              <span key={`${tool}-${index}`} className="marquee-pill">{tool}</span>
+            ))}
+          </div>
         </div>
       </div>
     </section>
