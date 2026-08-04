@@ -4,8 +4,10 @@ import { type CSSProperties, useEffect, useState } from 'react';
 import HeroModelSection from '@/components/HeroModelSection';
 import ServicesEnhanced from '@/components/ServicesEnhanced';
 import PortfolioEnhanced from '@/components/PortfolioEnhanced';
+import ProcessSection from '@/components/ProcessSection';
 import ContactEnhanced from '@/components/ContactEnhanced';
 import AboutSection from '@/components/AboutSection';
+import Testimonials3DEnhanced from '@/components/Testimonials3DEnhanced';
 
 export default function Page() {
   const [scrollY, setScrollY] = useState(0);
@@ -35,6 +37,8 @@ export default function Page() {
         <AboutSection />
         <ServicesEnhanced />
         <PortfolioEnhanced />
+        <ProcessSection />
+        <Testimonials3DEnhanced />
         <ContactEnhanced />
       </main>
     </div>
