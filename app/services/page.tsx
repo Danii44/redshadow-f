@@ -1,5 +1,11 @@
-import Services from '@/pages/Services';
+"use client";
+
+import ServicesEnhanced from '@/components/ServicesEnhanced';
 
 export default function ServicesPage() {
-  return <Services />;
+  return (
+    <div className="min-h-screen bg-black pt-20">
+      <ServicesEnhanced />
+    </div>
+  );
 }

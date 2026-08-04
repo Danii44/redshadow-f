@@ -1,8 +1,8 @@
 import './globals.css';
 import type { Metadata } from 'next';
-import { ThemeProvider } from '../client/src/contexts/ThemeContext';
-import { TooltipProvider } from '../client/src/components/ui/tooltip';
-import { Toaster } from '../client/src/components/ui/sonner';
+import { ThemeProvider } from '@/contexts/ThemeContext';
+import { TooltipProvider } from '@/components/ui/tooltip';
+import { Toaster } from '@/components/ui/sonner';
 import NavigationResponsive from '@/components/NavigationResponsive';
 import Footer from '@/components/Footer';
 
