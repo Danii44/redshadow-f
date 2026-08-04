@@ -51,7 +51,7 @@ export default function Testimonials3DEnhanced() {
         opacity: 0,
         y: 200,
         scale: 1,
-        zIndex: (i) => testimonials.length - i
+        zIndex: (i) => i
       });
 
       // The first card should be visible
@@ -148,9 +148,10 @@ export default function Testimonials3DEnhanced() {
             ref={(el) => {
               if (el) cardsRef.current[i] = el;
             }}
-            className="glass-strong w-full max-w-[90%] md:max-w-[700px] rounded-3xl p-8 md:p-12 flex flex-col gap-6"
+            className="w-full max-w-[90%] md:max-w-[700px] rounded-3xl p-8 md:p-12 flex flex-col gap-6"
             style={{
-              boxShadow: '0 24px 80px rgba(0, 0, 0, 0.4)',
+              background: '#060912',
+              boxShadow: '0 24px 80px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.1)',
               border: '1px solid rgba(0, 212, 255, 0.2)'
             }}
           >
