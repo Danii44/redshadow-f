@@ -95,7 +95,7 @@ export function ContactEnhanced() {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <div className="info-card">
+            <div className="info-card glass-card">
               <div className="info-item">
                 <div className="info-icon">📍</div>
                 <div className="info-text">
@@ -135,7 +135,7 @@ export function ContactEnhanced() {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <form onSubmit={handleSubmit} className="contact-form">
+            <form onSubmit={handleSubmit} className="contact-form glass-strong">
               <div className="form-group">
                 <input
                   type="text"

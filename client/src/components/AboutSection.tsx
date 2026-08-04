@@ -6,22 +6,25 @@ import './AboutSection.css';
 export function AboutSection() {
   return (
     <section className="about-section" id="about">
+      <div className="about-background-glow" />
+
       <div className="about-container">
         <motion.div
           className="about-image"
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: 'easeOut' }}
+          transition={{ duration: 0.8, ease: 'easeOut' }}
           viewport={{ once: true }}
         >
           <img src="/assets/images/backgrounds/hero-bg.jpg" alt="Red Shadow studio preview" />
+          <div className="about-image-glow" />
         </motion.div>
 
         <motion.div
           className="about-content"
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: 'easeOut', delay: 0.1 }}
+          transition={{ duration: 0.8, ease: 'easeOut', delay: 0.12 }}
           viewport={{ once: true }}
         >
           <span className="section-label">About the Studio</span>
@@ -36,15 +39,15 @@ export function AboutSection() {
             to create assets that stand out in marketing, investor decks, and online experiences.
           </p>
           <div className="about-values">
-            <div className="about-value">
+            <div className="about-value-card">
               <strong>Creative</strong>
               <span>Concepts with a refined, sci-fi edge.</span>
             </div>
-            <div className="about-value">
+            <div className="about-value-card">
               <strong>Technical</strong>
               <span>Engineering accuracy with rapid iteration.</span>
             </div>
-            <div className="about-value">
+            <div className="about-value-card">
               <strong>Premium</strong>
               <span>High-end visuals and production-quality assets.</span>
             </div>

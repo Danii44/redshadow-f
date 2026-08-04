@@ -57,7 +57,7 @@ function HoodieModel() {
   });
 
   return (
-    <group ref={group} scale={viewport.width < 600 ? 1.05 : 1.25} position={[0, 0.44, 0]}>
+    <group ref={group} scale={viewport.width < 600 ? 1.15 : 1.35} position={[0, -0.25, 0]}>
       <primitive object={model} />
     </group>
   );
@@ -65,13 +65,12 @@ function HoodieModel() {
 
 export function HoodieModelViewer() {
   return (
-    <div className="w-full h-full overflow-hidden">
+    <div className="w-full h-screen overflow-hidden">
       <Canvas
         camera={{ position: [0, 0, 3], fov: 50 }}
-        style={{ background: '#07090f' }}
+        style={{ background: 'linear-gradient(135deg, #0a0a0a 0%, #1a0033 100%)' }}
         onCreated={(state) => {
           state.gl.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-          state.gl.setClearColor('#07090f', 1);
         }}
       >
         <PresentationControls speed={1.5} global zoom={1} rotation={[0, 0, 0]}>

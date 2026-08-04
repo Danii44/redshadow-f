@@ -52,7 +52,7 @@ export function ReviewsSection() {
 
   return (
     <section className="reviews-section">
-      <div className="reviews-shell">
+      <div className="reviews-shell glass-strong">
         <motion.div
           className="reviews-background-glow"
           animate={{ rotate: 360 }}

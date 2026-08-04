@@ -35,15 +35,24 @@ export function HeroModelSection() {
 
   return (
     <div id="home" ref={containerRef} className="hero-model-section">
-      <div className="hero-content-grid">
-        <motion.div
-          className="hero-copy-panel"
-          initial={{ opacity: 0, x: -30 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8, delay: 0.1 }}
-          viewport={{ once: true }}
-        >
-          <div className="hero-copy-top">
+      {/* Full-Screen 3D Model */}
+      <div className="model-container">
+        <HoodieModelViewer />
+      </div>
+
+      {/* Overlay Gradient - Subtle top fade */}
+      <div className="hero-overlay-top"></div>
+
+      {/* Hero Info Panel Bridge */}
+      <motion.div
+        className="hero-info-panel glass-strong"
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, delay: 0.2 }}
+        viewport={{ once: true }}
+      >
+        <div className="hero-info-content">
+          <div className="hero-info-top">
             <img src="/assets/logo.png" alt="Red Shadow Designs" className="hero-logo-small" />
             <span className="hero-info-label">Precision engineering brand studio</span>
           </div>
@@ -51,8 +60,7 @@ export function HeroModelSection() {
             Red Shadow <span className="accent-gradient">Designs</span>
           </h1>
           <p className="hero-model-subtitle">
-            We craft premium product visuals, technical models, and brand identities that feel sharp,
-            professional, and unforgettable.
+            Product visuals, technical models, and brand identity for premium products.
           </p>
           <div className="hero-info-actions">
             <button className="glass-button-lg">
@@ -63,17 +71,12 @@ export function HeroModelSection() {
           <div className="hero-info-chips">
             <span>CAD</span>
             <span>3D Rendering</span>
-            <span>Brand Identity</span>
+            <span>Animation</span>
           </div>
-        </motion.div>
-
-        <div className="hero-model-wrapper">
-          <HoodieModelViewer />
         </div>
-      </div>
+      </motion.div>
 
-      <div className="hero-overlay-top"></div>
-
+      {/* Scroll Indicator */}
       <motion.div
         className="scroll-indicator-hero"
         animate={{ y: [0, 12, 0] }}

@@ -113,7 +113,7 @@ export function ServicesEnhanced() {
           {services.map((service) => (
             <motion.div
               key={service.id}
-              className="service-card"
+              className="service-card glass-card"
               variants={itemVariants}
               whileHover={{
                 scale: 1.05,

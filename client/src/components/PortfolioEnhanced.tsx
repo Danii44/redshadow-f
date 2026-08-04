@@ -164,7 +164,7 @@ export function PortfolioEnhanced() {
           {portfolioItems.map((item) => (
             <div key={item.id} className="portfolio-item-wrapper">
               <motion.div 
-                className="portfolio-item"
+                className="portfolio-item glass-card"
                 whileHover={{ scale: 1.02, transition: { duration: 0.3 } }}
               >
                 <div className="portfolio-item-image-box">
