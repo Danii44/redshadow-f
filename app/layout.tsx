@@ -7,7 +7,7 @@ import NavigationResponsive from '@/components/NavigationResponsive';
 import Footer from '@/components/Footer';
 
 export const metadata: Metadata = {
-  title: 'Red Shadow Designs',
+  title: 'Red Shadow Design',
   description: 'Futuristic engineering showroom experience',
 };
 

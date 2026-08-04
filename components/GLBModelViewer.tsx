@@ -17,10 +17,44 @@ function Model({ url }: { url: string }) {
 
   const model = useMemo(() => {
     const clonedScene = scene.clone();
+    const applyMaterialTone = (material: THREE.Material) => {
+      const nextMaterial = material.clone();
+
+      if ('color' in nextMaterial) {
+        (nextMaterial as THREE.MeshStandardMaterial).color = new THREE.Color('#111319');
+      }
+      if ('emissive' in nextMaterial) {
+        (nextMaterial as THREE.MeshStandardMaterial).emissive = new THREE.Color('#05070d');
+      }
+      if ('emissiveIntensity' in nextMaterial) {
+        (nextMaterial as THREE.MeshStandardMaterial).emissiveIntensity = 0.18;
+      }
+      if ('metalness' in nextMaterial) {
+        (nextMaterial as THREE.MeshStandardMaterial).metalness = 0.96;
+      }
+      if ('roughness' in nextMaterial) {
+        (nextMaterial as THREE.MeshStandardMaterial).roughness = 0.18;
+      }
+      if ('envMapIntensity' in nextMaterial) {
+        (nextMaterial as THREE.MeshStandardMaterial).envMapIntensity = 1.4;
+      }
+
+      return nextMaterial;
+    };
+
     clonedScene.traverse((child: any) => {
       if (child.isMesh) {
         child.castShadow = true;
         child.receiveShadow = true;
+
+        const material = child.material;
+        if (material) {
+          if (Array.isArray(material)) {
+            child.material = material.map((entry: THREE.Material) => applyMaterialTone(entry));
+          } else {
+            child.material = applyMaterialTone(material);
+          }
+        }
       }
     });
     return clonedScene;
@@ -106,12 +140,12 @@ export function GLBModelViewer() {
             <Model url={modelUrl} />
           </PresentationControls>
 
-          <ambientLight intensity={0.9} />
-          <hemisphereLight intensity={0.8} color="#c084fc" groundColor="#05060a" />
-          <directionalLight position={[10, 12, 6]} intensity={1.6} castShadow />
-          <spotLight position={[-6, 10, 10]} angle={0.4} penumbra={1} intensity={2.4} color="#00c8ff" />
-          <pointLight position={[-12, -5, -5]} intensity={0.8} color="#00c8ff" />
-          <pointLight position={[12, -6, -5]} intensity={0.8} color="#7c3aed" />
+          <ambientLight intensity={0.95} color="#c9d9ff" />
+          <hemisphereLight intensity={1.05} color="#a7e4ff" groundColor="#06070a" />
+          <directionalLight position={[10, 12, 6]} intensity={2.4} castShadow color="#ffffff" />
+          <spotLight position={[-6, 10, 10]} angle={0.45} penumbra={1} intensity={3.0} color="#00c8ff" />
+          <pointLight position={[-12, -5, -5]} intensity={1.35} color="#00c8ff" />
+          <pointLight position={[12, -6, -5]} intensity={1.45} color="#7c3aed" />
 
           <Environment preset="city" />
 

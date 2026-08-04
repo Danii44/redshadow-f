@@ -3,7 +3,6 @@
 import { type CSSProperties, useEffect, useState } from 'react';
 import HeroModelSection from '@/components/HeroModelSection';
 import ServicesEnhanced from '@/components/ServicesEnhanced';
-import ReviewsSection from '@/components/ReviewsSection';
 import PortfolioEnhanced from '@/components/PortfolioEnhanced';
 import ContactEnhanced from '@/components/ContactEnhanced';
 import AboutSection from '@/components/AboutSection';
@@ -36,7 +35,6 @@ export default function Page() {
         <AboutSection />
         <ServicesEnhanced />
         <PortfolioEnhanced />
-        <ReviewsSection />
         <ContactEnhanced />
       </main>
     </div>

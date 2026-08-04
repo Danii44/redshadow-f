@@ -30,7 +30,7 @@ export function AboutSection() {
           <span className="section-label">About the Studio</span>
           <h2>Precision engineering meets cinematic design</h2>
           <p>
-            Red Shadow Designs blends technical product engineering with premium visual storytelling.
+            Red Shadow Design blends technical product engineering with premium visual storytelling.
             We deliver CAD-ready models, realistic renders, and motion-rich product scenes that make
             your brand feel futuristic and polished.
           </p>

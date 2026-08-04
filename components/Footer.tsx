@@ -26,8 +26,10 @@ export function Footer() {
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            <div className="footer-logo">RS</div>
-            <h3>Red Shadow Designs</h3>
+            <div className="footer-logo-wrap">
+              <img src="/assets/logo.png" alt="Red Shadow Design" className="footer-logo-image" />
+            </div>
+            <h3>Red Shadow Design</h3>
             <p>Premium 3D engineering and design solutions for ambitious next-generation brands.</p>
           </motion.div>
 
@@ -81,7 +83,7 @@ export function Footer() {
         </div>
 
         <div className="footer-bottom">
-          <p>&copy; {currentYear} Red Shadow Designs. All rights reserved.</p>
+          <p>&copy; {currentYear} Red Shadow Design. All rights reserved.</p>
           <div className="footer-legal">
             <a href="#privacy">Privacy Policy</a>
             <span>•</span>

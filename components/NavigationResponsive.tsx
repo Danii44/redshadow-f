@@ -62,7 +62,7 @@ export function NavigationResponsive() {
         >
           <Link href="/" className="nav-logo-link">
             <img src="/assets/logo.png" alt="Red Shadow Designs" className="logo-image" />
-            <span className="logo-text">Red Shadow</span>
+            <span className="logo-text">Red Shadow Design</span>
           </Link>
         </motion.div>
 

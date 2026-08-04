@@ -1,5 +1,5 @@
 /**
- * ReviewsSection.css - Futuristic testimonial carousel with marquee stack
+ * ReviewsSection.css - sleek stacked testimonial deck with wheel/swipe controls
  */
 
 .reviews-section {
@@ -85,22 +85,27 @@
   justify-content: center;
   align-items: center;
   margin-bottom: 1.8rem;
+  overscroll-behavior: contain;
+  touch-action: pan-y;
 }
 
 .reviews-stage {
   position: relative;
   width: min(820px, 100%);
-  min-height: 340px;
+  min-height: 360px;
+  height: 420px;
 }
 
 .review-card {
   position: absolute;
-  inset: 0;
+  left: 0;
+  right: 0;
+  top: 0;
   width: min(820px, 100%);
   margin: 0 auto;
   padding: 2.4rem;
   border-radius: 30px;
-  background: rgba(10, 13, 26, 0.9);
+  background: rgba(10, 13, 26, 0.92);
   border: 1px solid rgba(255, 255, 255, 0.12);
   display: flex;
   flex-direction: column;
@@ -108,6 +113,9 @@
   box-shadow: 0 28px 90px rgba(0, 0, 0, 0.22);
   backdrop-filter: blur(18px);
   overflow: hidden;
+  transform-origin: center center;
+  will-change: transform, opacity, filter;
+  transition: transform 0.64s ease, opacity 0.64s ease, filter 0.64s ease, z-index 0s linear;
 }
 
 .review-ribbon {
@@ -136,14 +144,20 @@
 }
 
 .review-card.is-active {
-  border-color: rgba(0, 212, 255, 0.24);
-  box-shadow: 0 32px 110px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(0, 212, 255, 0.08);
+  border-color: rgba(0, 212, 255, 0.28);
+  box-shadow: 0 30px 110px rgba(0, 0, 0, 0.42), 0 0 0 1px rgba(0, 212, 255, 0.08);
 }
 
 .review-card.is-prev,
-.review-card.is-next {
-  opacity: 0.18;
+.review-card.is-next,
+.review-card.is-deep {
   pointer-events: none;
+}
+
+.review-card.is-next,
+.review-card.is-prev,
+.review-card.is-deep {
+  opacity: 0.86;
 }
 
 .review-quote {

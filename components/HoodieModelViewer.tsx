@@ -13,6 +13,7 @@ import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { PresentationControls, Environment, ContactShadows, useGLTF } from '@react-three/drei';
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
+import * as THREE from 'three';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -24,10 +25,43 @@ function HoodieModel() {
 
   const model = useMemo(() => {
     const clonedScene = scene.clone();
+
+    const applyMaterialTone = (material: THREE.Material) => {
+      const nextMaterial = material.clone();
+
+      if ('color' in nextMaterial) {
+        (nextMaterial as THREE.MeshStandardMaterial).color = new THREE.Color('#111319');
+      }
+      if ('emissive' in nextMaterial) {
+        (nextMaterial as THREE.MeshStandardMaterial).emissive = new THREE.Color('#05070d');
+      }
+      if ('emissiveIntensity' in nextMaterial) {
+        (nextMaterial as THREE.MeshStandardMaterial).emissiveIntensity = 0.16;
+      }
+      if ('metalness' in nextMaterial) {
+        (nextMaterial as THREE.MeshStandardMaterial).metalness = 0.9;
+      }
+      if ('roughness' in nextMaterial) {
+        (nextMaterial as THREE.MeshStandardMaterial).roughness = 0.24;
+      }
+      if ('envMapIntensity' in nextMaterial) {
+        (nextMaterial as THREE.MeshStandardMaterial).envMapIntensity = 1.2;
+      }
+
+      return nextMaterial;
+    };
+
     clonedScene.traverse((child: any) => {
       if (child.isMesh) {
         child.castShadow = true;
         child.receiveShadow = true;
+
+        const material = child.material;
+        if (Array.isArray(material)) {
+          child.material = material.map((entry: THREE.Material) => applyMaterialTone(entry));
+        } else if (material) {
+          child.material = applyMaterialTone(material);
+        }
       }
     });
     return clonedScene;

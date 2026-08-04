@@ -1,14 +1,12 @@
 "use client";
 
 /**
- * PortfolioEnhanced.tsx - High-Performance Portfolio Section
- * 
+ * PortfolioEnhanced.tsx - Horizontal portfolio showcase section
+ *
  * Features:
- * - Smooth horizontal scroll effect using GSAP pinning
- * - Zoom-in animations for cards on scroll
- * - Parallax background image (local asset)
- * - Glassmorphism UI elements
- * - Optimized for performance (no layout shifts)
+ * - ScrollTrigger-pinned horizontal gallery within a vertical flow
+ * - Parallax motion on project imagery while the horizontal deck moves
+ * - Responsive glassmorphism card layout
  */
 
 import { useEffect, useRef } from 'react';
@@ -71,51 +69,74 @@ const portfolioItems = [
 ];
 
 export function PortfolioEnhanced() {
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const horizontalRef = useRef<HTMLDivElement>(null);
-  const bgRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const horizontalRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    if (!sectionRef.current || !horizontalRef.current) return;
+    const section = sectionRef.current;
+    const track = horizontalRef.current;
+
+    if (!section || !track) return;
 
     const ctx = gsap.context(() => {
-      if (bgRef.current) {
-        gsap.to(bgRef.current, {
-          y: '18%',
-          ease: 'none',
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: 'top bottom',
-            end: 'bottom top',
-            scrub: true,
-          },
-        });
-      }
+      const cards = gsap.utils.toArray<HTMLElement>('.portfolio-item-wrapper', track);
+      const containerWidth = window.innerWidth;
+      const distance = Math.max(track.scrollWidth - containerWidth * 0.76, 0);
+      const dragDistance = Math.max(distance + 800, 1300);
 
-      const track = horizontalRef.current;
-      const totalWidth = track?.scrollWidth ?? 0;
-      const visibleWidth = window.innerWidth;
-      const distance = Math.max(totalWidth - visibleWidth * 0.72, 0);
+      gsap.set(track, {
+        width: 'max-content',
+        minWidth: 'max-content',
+        x: 0,
+      });
 
       gsap.to(track, {
         x: () => -distance,
         ease: 'none',
         scrollTrigger: {
-          trigger: sectionRef.current,
+          trigger: section,
           start: 'top top',
-          end: `+=${Math.max(distance + 200, 500)}`,
+          end: `+=${dragDistance}`,
           scrub: 1,
+          pin: true,
+          anticipatePin: 1,
           invalidateOnRefresh: true,
         },
       });
-    }, sectionRef);
+
+      cards.forEach((card, index) => {
+        const image = card.querySelector('.portfolio-item-img') as HTMLElement | null;
+        if (!image) return;
+
+        gsap.fromTo(
+          image,
+          {
+            yPercent: index % 2 === 0 ? -10 : 8,
+            xPercent: index % 2 === 0 ? 4 : -4,
+            scale: 1.05,
+          },
+          {
+            yPercent: index % 2 === 0 ? 4 : -4,
+            xPercent: index % 2 === 0 ? -4 : 4,
+            scale: 1.12,
+            ease: 'none',
+            scrollTrigger: {
+              trigger: section,
+              start: 'top top',
+              end: 'bottom top',
+              scrub: true,
+            },
+          },
+        );
+      });
+    }, section);
 
     return () => ctx.revert();
   }, []);
 
   return (
     <section ref={sectionRef} id="portfolio" className="portfolio-section-wrapper">
-      <div ref={bgRef} className="portfolio-parallax-bg">
+      <div className="portfolio-parallax-bg">
         <img src="/assets/images/backgrounds/studio-bg.jpg" alt="Background" />
         <div className="portfolio-bg-overlay"></div>
       </div>

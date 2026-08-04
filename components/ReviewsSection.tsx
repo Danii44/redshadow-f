@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from 'react';
+import { useRef, useState, type TouchEvent, type WheelEvent } from 'react';
 import { motion } from 'framer-motion';
 import './ReviewsSection.css';
 
@@ -9,7 +9,7 @@ const reviews = [
     id: 1,
     name: 'Ava Carter',
     role: 'Product Designer',
-    quote: 'Red Shadow Designs transformed our concept into a futuristic product visual with precision, motion, and atmosphere.',
+    quote: 'Red Shadow Design transformed our concept into a futuristic product visual with precision, motion, and atmosphere.',
   },
   {
     id: 2,
@@ -52,14 +52,41 @@ const softwareStack = [
 
 export function ReviewsSection() {
   const [active, setActive] = useState(0);
+  const touchStartY = useRef<number | null>(null);
+  const lastWheelStep = useRef(0);
   const count = reviews.length;
 
-  useEffect(() => {
-    const interval = window.setInterval(() => {
-      setActive((current) => (current + 1) % count);
-    }, 7000);
-    return () => window.clearInterval(interval);
-  }, [count]);
+  const updateActiveByDirection = (direction: 1 | -1) => {
+    setActive((current) => (current + direction + count) % count);
+  };
+
+  const handleWheel = (event: WheelEvent<HTMLDivElement>) => {
+    const now = Date.now();
+    if (now - lastWheelStep.current < 520) return;
+
+    lastWheelStep.current = now;
+    if (Math.abs(event.deltaY) < 8) return;
+
+    event.preventDefault();
+    updateActiveByDirection(event.deltaY > 0 ? 1 : -1);
+  };
+
+  const handleTouchStart = (event: TouchEvent<HTMLDivElement>) => {
+    touchStartY.current = event.touches[0]?.clientY ?? null;
+  };
+
+  const handleTouchEnd = (event: TouchEvent<HTMLDivElement>) => {
+    if (touchStartY.current === null) return;
+
+    const endY = event.changedTouches[0]?.clientY ?? touchStartY.current;
+    const delta = touchStartY.current - endY;
+
+    if (Math.abs(delta) > 40) {
+      updateActiveByDirection(delta > 0 ? 1 : -1);
+    }
+
+    touchStartY.current = null;
+  };
 
   return (
     <section className="reviews-section">
@@ -76,25 +103,53 @@ export function ReviewsSection() {
           <p>Creative founders, product teams, and brand builders choose us when they need memorable 3D storytelling that feels premium.</p>
         </div>
 
-        <div className="reviews-carousel-shell">
+        <div
+          className="reviews-carousel-shell"
+          onWheel={handleWheel}
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
+        >
           <div className="reviews-stage">
             {reviews.map((review, index) => {
-              const isActive = index === active;
-              const isPrev = index === (active - 1 + count) % count;
-              const isNext = index === (active + 1) % count;
+              const relativeIndex = ((index - active + count) % count + count) % count;
+              const isActive = relativeIndex === 0;
+              const isNext = relativeIndex === 1;
+              const isPrev = relativeIndex === count - 1;
+              const isDeep = relativeIndex > 1;
+
+              const style = isActive
+                ? {
+                    transform: 'translate3d(0, 0, 0) scale(1)',
+                    opacity: 1,
+                    filter: 'blur(0px)',
+                    zIndex: count,
+                  }
+                : isNext
+                  ? {
+                      transform: 'translate3d(0, 42px, 0) scale(0.98)',
+                      opacity: 0.86,
+                      filter: 'blur(0px)',
+                      zIndex: count - 1,
+                    }
+                  : isPrev
+                    ? {
+                        transform: 'translate3d(0, -24px, 0) scale(0.94)',
+                        opacity: 0.58,
+                        filter: 'blur(2px)',
+                        zIndex: 2,
+                      }
+                    : {
+                        transform: `translate3d(0, ${-70 - (relativeIndex - 1) * 16}px, 0) scale(${0.9 - (relativeIndex - 1) * 0.03})`,
+                        opacity: 0.18,
+                        filter: 'blur(3px)',
+                        zIndex: 1,
+                      };
 
               return (
-                <motion.article
+                <article
                   key={review.id}
-                  className={`review-card ${isActive ? 'is-active' : ''} ${isPrev ? 'is-prev' : ''} ${isNext ? 'is-next' : ''}`}
-                  initial={{ opacity: 0, y: 26, scale: 0.96 }}
-                  animate={{
-                    opacity: isActive || isPrev || isNext ? 1 : 0,
-                    y: isActive ? 0 : isPrev ? -20 : 20,
-                    scale: isActive ? 1 : 0.97,
-                    x: isActive ? 0 : isPrev ? -24 : 24,
-                  }}
-                  transition={{ duration: 0.6, ease: 'easeOut' }}
+                  className={`review-card ${isActive ? 'is-active' : ''} ${isPrev ? 'is-prev' : ''} ${isNext ? 'is-next' : ''} ${isDeep ? 'is-deep' : ''}`}
+                  style={style}
                 >
                   <div className="review-ribbon">Client</div>
                   <p className="review-quote">“{review.quote}”</p>
@@ -102,7 +157,7 @@ export function ReviewsSection() {
                     <span className="review-name">{review.name}</span>
                     <span className="review-role">{review.role}</span>
                   </div>
-                </motion.article>
+                </article>
               );
             })}
           </div>
@@ -111,7 +166,7 @@ export function ReviewsSection() {
         <div className="reviews-controls">
           <button
             className="carousel-button"
-            onClick={() => setActive((current) => (current - 1 + count) % count)}
+            onClick={() => updateActiveByDirection(-1)}
             aria-label="Previous testimonial"
           >
             ‹
@@ -128,7 +183,7 @@ export function ReviewsSection() {
           </div>
           <button
             className="carousel-button"
-            onClick={() => setActive((current) => (current + 1) % count)}
+            onClick={() => updateActiveByDirection(1)}
             aria-label="Next testimonial"
           >
             ›

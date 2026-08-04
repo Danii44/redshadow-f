@@ -5,6 +5,7 @@
 .portfolio-section-wrapper {
   position: relative;
   width: 100%;
+  min-height: 100vh;
   overflow: hidden;
   background:
     radial-gradient(circle at top left, rgba(0, 212, 255, 0.12), transparent 24%),
@@ -91,7 +92,9 @@
   align-items: center;
   gap: 2rem;
   padding: 0 5% 0 5%;
-  width: 100%;
+  width: max-content;
+  min-width: max-content;
+  overflow: visible;
   will-change: transform;
 }
 
@@ -99,6 +102,7 @@
   flex-shrink: 0;
   width: min(28rem, 72vw);
   perspective: 1200px;
+  scroll-snap-align: start;
 }
 
 .portfolio-item {
