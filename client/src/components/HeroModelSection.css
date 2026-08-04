@@ -1,0 +1,428 @@
+/**
+ * HeroModelSection.css - Full-Screen Hero with GLB Model
+ */
+
+.hero-model-section {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at 50% 20%, rgba(124, 58, 237, 0.18), transparent 28%),
+    radial-gradient(circle at 50% 45%, rgba(0, 212, 255, 0.12), transparent 30%),
+    linear-gradient(180deg, rgba(15, 9, 28, 1) 0%, rgba(3, 4, 9, 1) 60%, #000 100%);
+  overflow: hidden;
+  z-index: 0;
+}
+
+.hero-content-grid {
+  position: relative;
+  width: min(1400px, 95%);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1.05fr;
+  gap: 3rem;
+  align-items: center;
+  z-index: 1;
+}
+
+.hero-copy-panel {
+  padding: 3rem 0 0 0;
+  border-radius: 0;
+  background: transparent;
+  border: none;
+  backdrop-filter: none;
+  box-shadow: none;
+  max-width: 640px;
+}
+
+.hero-model-wrapper {
+  position: relative;
+  width: 100%;
+  min-height: 620px;
+  height: min(80vh, 760px);
+  border-radius: 36px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.18);
+}
+
+.hero-model-wrapper::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(circle at 55% 40%, rgba(0, 200, 255, 0.09), transparent 32%);
+}
+
+.hero-model-wrapper canvas {
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+}
+
+.hero-copy-top {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.75rem;
+}
+
+.hero-model-title {
+  font-size: clamp(3rem, 5vw, 4.8rem);
+  line-height: 1.02;
+  margin: 0 0 1.2rem;
+}
+
+.hero-model-subtitle {
+  max-width: 35rem;
+}
+
+@media (max-width: 1024px) {
+  .hero-content-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .hero-model-wrapper {
+    min-height: 520px;
+    height: auto;
+  }
+}
+
+@media (max-width: 700px) {
+  .hero-model-section {
+    padding-top: 0;
+  }
+
+  .hero-model-wrapper {
+    min-height: 420px;
+    border-radius: 24px;
+  }
+}
+
+/* ============================================================================
+   OVERLAY GRADIENTS - Subtle transitions
+   ============================================================================ */
+
+.hero-overlay-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 200px;
+  background: linear-gradient(
+    to bottom,
+    rgba(10, 10, 10, 0.8) 0%,
+    rgba(10, 10, 10, 0.4) 50%,
+    transparent 100%
+  );
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* ============================================================================
+   HERO INFO PANEL - Split desktop layout with left-side glass card
+   ============================================================================ */
+
+.hero-info-panel {
+  position: absolute;
+  left: 50%;
+  bottom: 3rem;
+  transform: translateX(-50%);
+  width: min(48rem, 92%);
+  max-width: 980px;
+  z-index: 20;
+  border-radius: 2rem;
+  padding: 2.5rem;
+  background: rgba(15, 15, 31, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  box-shadow:
+    0 35px 90px rgba(0, 0, 0, 0.24),
+    inset 0 1px 2px rgba(255, 255, 255, 0.05);
+}
+
+.hero-info-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.hero-info-chips span {
+  padding: 0.7rem 1rem;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+}
+
+.hero-info-top {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.hero-logo-small {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.hero-info-label {
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 0.9rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.hero-info-panel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+}
+
+.hero-info-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Hero Model Title */
+.hero-model-title {
+  font-size: clamp(2rem, 6vw, 3.5rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  color: #ffffff;
+  margin: 0;
+  font-family: 'Space Mono', monospace;
+}
+
+.accent-gradient {
+  background: linear-gradient(135deg, #00c8ff 0%, #7c3aed 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradientShift 4s ease-in-out infinite;
+}
+
+@keyframes gradientShift {
+  0%, 100% {
+    background: linear-gradient(135deg, #00c8ff 0%, #7c3aed 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  50% {
+    background: linear-gradient(135deg, #7c3aed 0%, #00c8ff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+}
+
+/* Hero Model Subtitle */
+.hero-model-subtitle {
+  font-size: clamp(0.875rem, 2vw, 1.25rem);
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  line-height: 1.6;
+}
+
+/* Hero Info Actions */
+.hero-info-actions {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+
+.glass-button-lg {
+  position: relative;
+  padding: 1rem 2.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #00c8ff;
+  background: transparent;
+  border: 2px solid #00c8ff;
+  border-radius: 12px;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.glass-button-lg:hover {
+  background: rgba(0, 200, 255, 0.1);
+  box-shadow: 0 0 30px rgba(0, 200, 255, 0.4),
+    inset 0 0 20px rgba(0, 200, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+.glass-button-lg:active {
+  transform: translateY(0);
+}
+
+.glass-button-outline {
+  color: #7c3aed;
+  border-color: #7c3aed;
+}
+
+.glass-button-outline:hover {
+  background: rgba(124, 58, 237, 0.1);
+  box-shadow: 0 0 30px rgba(124, 58, 237, 0.4),
+    inset 0 0 20px rgba(124, 58, 237, 0.1);
+}
+
+.button-glow {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(0, 200, 255, 0.3), transparent);
+  animation: buttonShine 3s infinite;
+}
+
+@keyframes buttonShine {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+/* ============================================================================
+   SCROLL INDICATOR - Animated arrow
+   ============================================================================ */
+
+.scroll-indicator-hero {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+  color: #00c8ff;
+  opacity: 0.7;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.scroll-indicator-hero:hover {
+  opacity: 1;
+  transform: translateX(-50%) scale(1.2);
+}
+
+/* ============================================================================
+   RESPONSIVE DESIGN
+   ============================================================================ */
+
+@media (max-width: 768px) {
+  .hero-model-section {
+    display: block;
+    min-height: auto;
+    padding-top: 80px;
+  }
+
+  .model-container {
+    position: relative;
+    height: 68vh;
+  }
+
+  .hero-info-panel {
+    position: relative;
+    width: 95%;
+    max-width: 840px;
+    margin: -3rem auto 2rem auto;
+    padding: 2rem;
+    border-radius: 24px;
+  }
+
+  .hero-info-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-model-title {
+    font-size: 2rem;
+  }
+
+  .hero-model-subtitle {
+    font-size: 0.875rem;
+  }
+
+  .hero-info-actions {
+    gap: 1rem;
+  }
+
+  .glass-button-lg {
+    padding: 0.875rem 2rem;
+    font-size: 0.875rem;
+  }
+
+  .scroll-indicator-hero {
+    bottom: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-model-section {
+    min-height: 170vh;
+  }
+
+  .model-container {
+    position: relative;
+    height: 60vh;
+  }
+
+  .hero-info-panel {
+    width: 95%;
+    margin: -2.5rem auto 1.5rem auto;
+    padding: 1.5rem;
+    border-radius: 18px;
+  }
+
+  .hero-info-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-model-title {
+    font-size: 1.5rem;
+  }
+
+  .hero-model-subtitle {
+    font-size: 0.75rem;
+  }
+
+  .hero-info-actions {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .glass-button-lg {
+    padding: 0.75rem 1.5rem;
+    font-size: 0.75rem;
+    width: 100%;
+  }
+
+  .scroll-indicator-hero {
+    display: none;
+  }
+}

@@ -1,0 +1,193 @@
+/**
+ * ReviewsSection.css - Client testimonials and social proof
+ */
+
+.reviews-section {
+  position: relative;
+  padding: 6rem 0 3rem;
+  background: linear-gradient(180deg, rgba(5, 6, 19, 0.92) 0%, #02030a 100%);
+  overflow: hidden;
+}
+
+.reviews-shell {
+  position: relative;
+  margin: 0 auto;
+  max-width: 1200px;
+  padding: 0;
+  border-radius: 32px;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  backdrop-filter: none;
+  overflow: visible;
+}
+
+.reviews-background-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 540px;
+  height: 540px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0, 212, 255, 0.18), transparent 45%);
+  filter: blur(40px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.reviews-header {
+  position: relative;
+  text-align: center;
+  margin-bottom: 2.5rem;
+  z-index: 1;
+}
+
+.reviews-header h2 {
+  font-size: clamp(2.25rem, 5vw, 3.5rem);
+  margin: 0;
+  color: #fff;
+  font-family: 'Space Mono', monospace;
+  background: linear-gradient(135deg, #00d4ff 0%, #7c3aed 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.reviews-header p {
+  margin: 1.25rem auto 0;
+  max-width: 620px;
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 1rem;
+  line-height: 1.8;
+}
+
+.reviews-carousel-shell {
+  position: relative;
+  width: 100%;
+  min-height: 360px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 3rem;
+}
+
+.review-card {
+  width: min(780px, 100%);
+  padding: 2.5rem;
+  border-radius: 28px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.16);
+}
+
+.review-card.is-active {
+  border-color: rgba(0, 212, 255, 0.3);
+}
+
+.review-quote {
+  margin: 0 0 2rem;
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 1rem;
+  line-height: 1.8;
+  letter-spacing: 0.01em;
+}
+
+.review-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  opacity: 0.95;
+}
+
+.review-name {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.review-role {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.reviews-controls {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  z-index: 1;
+}
+
+.carousel-button {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 212, 255, 0.28);
+  background: rgba(0, 0, 0, 0.55);
+  color: #00d4ff;
+  font-size: 1.75rem;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.carousel-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px rgba(0, 212, 255, 0.25);
+}
+
+.carousel-dots {
+  display: flex;
+  gap: 0.65rem;
+}
+
+.carousel-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.carousel-dot.active {
+  width: 14px;
+  height: 14px;
+  background: #00d4ff;
+  box-shadow: 0 0 16px rgba(0, 212, 255, 0.5);
+}
+
+@media (max-width: 980px) {
+  .reviews-shell {
+    padding: 2rem;
+  }
+
+  .reviews-carousel-shell {
+    min-height: 520px;
+  }
+
+  .reviews-carousel-stage {
+    height: 520px;
+  }
+
+  .review-card {
+    width: 92%;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 0;
+    opacity: 1 !important;
+    position: static;
+  }
+
+  .reviews-controls {
+    flex-wrap: wrap;
+    padding-top: 1rem;
+  }
+}
