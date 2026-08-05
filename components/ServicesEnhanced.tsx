@@ -142,21 +142,29 @@ export default function ServicesEnhanced() {
                       animate={{ opacity: 1, scale: 1, x: 0 }}
                       exit={{ opacity: 0, scale: 0.9, x: 20 }}
                       transition={{ duration: 0.4, ease: [0.23, 1, 0.32, 1] }}
-                      className="absolute right-0 top-1/2 -translate-y-1/2 w-[300px] h-[200px] md:w-[450px] md:h-[300px] rounded-2xl overflow-hidden pointer-events-none z-30 shadow-[0_20px_50px_rgba(0,0,0,0.5)] border border-[rgba(255,255,255,0.1)] hidden md:block"
+                      className="absolute right-0 top-1/2 -translate-y-1/2 w-[300px] h-[200px] md:w-[450px] md:h-[300px] rounded-2xl overflow-hidden pointer-events-none z-30 shadow-[0_20px_50px_rgba(0,0,0,0.5)] hidden md:block"
                     >
                       <div className="absolute inset-0 bg-[#060912]" />
-                      <AnimatePresence mode="wait">
-                        <motion.img 
-                          key={currentImage} // Key forces React/Framer to re-mount and animate when image changes
-                          initial={{ opacity: 0, scale: 1.05 }}
-                          animate={{ opacity: 0.8, scale: 1 }}
-                          exit={{ opacity: 0 }}
-                          transition={{ duration: 0.3 }}
-                          src={currentImage} 
-                          alt={service.title}
-                          className="absolute inset-0 w-full h-full object-cover mix-blend-lighten"
-                        />
-                      </AnimatePresence>
+                      
+                      {/* Preload and stack all images, transition opacity based on active index */}
+                      {service.images.map((img, i) => {
+                        const isActive = i === (imageIndex % service.images.length);
+                        return (
+                          <motion.img 
+                            key={img}
+                            src={img} 
+                            alt={`${service.title} preview ${i}`}
+                            initial={false}
+                            animate={{ 
+                              opacity: isActive ? 0.8 : 0,
+                              scale: isActive ? 1 : 1.05
+                            }}
+                            transition={{ duration: 0.5, ease: "easeInOut" }}
+                            className="absolute inset-0 w-full h-full object-cover mix-blend-lighten"
+                          />
+                        );
+                      })}
+                      
                       <div className="absolute inset-0 bg-gradient-to-tr from-[#00d4ff]/20 to-transparent mix-blend-overlay" />
                     </motion.div>
                   )}
