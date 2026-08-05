@@ -26,23 +26,7 @@ const portfolioItems = [
     category: 'CAD Design & 3D Renders',
     description: 'Advanced spherical drone mechanical design, precision CAD modeling, and photorealistic rendering.',
     icon: '🚁',
-    image: 'https://images.unsplash.com/photo-1579820010410-c10411aaaa88?q=80&w=2697&auto=format&fit=crop'
-  },
-  {
-    id: 'cosmetic-travel-case',
-    title: 'Multi-Slot Cosmetic Case',
-    category: 'Product Design',
-    description: 'Integrated travel case design focusing on functional compartments and sleek industrial aesthetics.',
-    icon: '✨',
-    image: 'https://images.unsplash.com/photo-1596462502278-27bfdc403348?q=80&w=2000&auto=format&fit=crop'
-  },
-  {
-    id: 'wall-mounted-gym',
-    title: 'Concealed Multi-Gym',
-    category: 'Industrial Design',
-    description: 'Space-saving, wall-mounted multi-gym engineered for home environments with robust mechanisms.',
-    icon: '🏋️',
-    image: 'https://images.unsplash.com/photo-1540497077202-7c8a3999166f?q=80&w=2670&auto=format&fit=crop'
+    image: 'https://fiverr-res.cloudinary.com/image/upload/f_auto,q_auto,t_portfolio_project_large/v1/attachments/project_item/attachment/81067f724df0670e9a752db093dcfc84-1778076067376/Orbei.png'
   },
   {
     id: 'f1-car-keychain',
@@ -50,23 +34,39 @@ const portfolioItems = [
     category: 'Precision Engineering',
     description: 'Highly detailed, precision-engineered miniature F1 car model designed for CNC or 3D printing.',
     icon: '🏎️',
-    image: 'https://images.unsplash.com/photo-1532981358914-7221b2bbbaaa?q=80&w=2670&auto=format&fit=crop'
+    image: 'https://fiverr-res.cloudinary.com/image/upload/f_auto,q_auto,t_portfolio_project_large/v1/attachments/project_item/attachment/6d233936dc12e8c10bfcbc01df04f8ee-1778085149990/F1%20Car%20keychain.png'
+  },
+  {
+    id: 'ketchup-cap',
+    title: 'Ketchup Dispensing Cap',
+    category: 'Product Design',
+    description: 'Innovative dispensing cap design with precise mating geometry, engineered for injection molding.',
+    icon: '✨',
+    image: 'https://fiverr-res.cloudinary.com/image/upload/f_auto,q_auto,t_portfolio_project_large/v1/attachments/project_item/attachment/993a073adc2457995e71295779fb790d-1778075442653/Ketchup%20dispensing%20Cap.png'
   },
   {
     id: 'tkr-implant',
-    title: 'Total Knee Replacement',
+    title: 'Knee Implant',
     category: 'Medical Device Modeling',
-    description: 'Anatomically accurate TKR implant CAD model focusing on biomechanics and material specifications.',
+    description: 'Anatomically accurate knee implant CAD model focusing on biomechanics and material specifications.',
     icon: '🦴',
-    image: 'https://images.unsplash.com/photo-1582719471384-894fbb16e074?q=80&w=2564&auto=format&fit=crop'
+    image: 'https://fiverr-res.cloudinary.com/image/upload/f_auto,q_auto,t_portfolio_project_large/v1/attachments/project_item/attachment/3ba554de2ad029f269a870a21a79b4de-1778103959841/Knee%20Implant.png'
   },
   {
-    id: 'autonomous-imaging-system',
-    title: '360° Imaging System',
+    id: 'compressor-chamber',
+    title: 'Compressor Chamber',
+    category: 'Industrial Design',
+    description: 'Full parametric assembly of a compressor chamber with internal component packaging and thermal simulation.',
+    icon: '⚙️',
+    image: 'https://fiverr-res.cloudinary.com/image/upload/f_auto,q_auto,t_portfolio_project_large/v1/attachments/project_item/attachment/113b8251a0029e50715d5027db806a51-1778104554118/Compressor%20chmber.png'
+  },
+  {
+    id: 'camera-housing',
+    title: 'Camera Housing',
     category: 'Hardware Design',
-    description: 'Autonomous spherical imaging hardware featuring complex internal component packaging.',
+    description: 'Precision camera housing design with lens mount integration, weather sealing, and ergonomic grip profiling.',
     icon: '📷',
-    image: 'https://images.unsplash.com/photo-1516383274235-5f42d6c6426d?q=80&w=2674&auto=format&fit=crop'
+    image: 'https://fiverr-res.cloudinary.com/image/upload/f_auto,q_auto,t_portfolio_project_large/v1/attachments/project_item/attachment/89a8e01d1172396211415fc354ca854e-1783201809117/Camera%20Black.1.jpg'
   },
 ];
 
