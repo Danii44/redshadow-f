@@ -1,13 +1,7 @@
 "use client";
 
 /**
- * ContactEnhanced.tsx - Contact Section with Glassmorphism
- * 
- * Features:
- * - Glass effect form and cards
- * - Parallax background image (local asset)
- * - Interactive form elements
- * - Responsive layout
+ * ContactEnhanced.tsx - Contact Section with Netlify Form & Glassmorphism
  */
 
 import { useEffect, useRef, useState } from 'react';
@@ -27,6 +21,7 @@ export function ContactEnhanced() {
     subject: '',
     message: '',
   });
+  const [submitted, setSubmitted] = useState(false);
 
   useEffect(() => {
     if (!sectionRef.current || !bgRef.current) return;
@@ -57,9 +52,27 @@ export function ContactEnhanced() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
-    alert('Thank you! Your message has been sent.');
-    setFormData({ name: '', email: '', subject: '', message: '' });
+    
+    // Encode form body for Netlify Forms AJAX submission
+    const encode = (data: Record<string, string>) => {
+      return Object.keys(data)
+        .map((key) => encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
+        .join('&');
+    };
+
+    fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: encode({
+        'form-name': 'contact',
+        ...formData,
+      }),
+    })
+      .then(() => {
+        setSubmitted(true);
+        setFormData({ name: '', email: '', subject: '', message: '' });
+      })
+      .catch((error) => console.error('Form submission error:', error));
   };
 
   return (
@@ -105,8 +118,6 @@ export function ContactEnhanced() {
                 </div>
               </div>
 
-
-
               <div className="info-item">
                 <div className="info-icon">📍</div>
                 <div className="info-text">
@@ -130,10 +141,10 @@ export function ContactEnhanced() {
               </div>
 
               <div className="social-links">
-                <a href="#" className="social-icon" title="X">𝕏</a>
+                <a href="https://www.fiverr.com/daniyalahmad7" target="_blank" rel="noopener noreferrer" className="social-icon" title="Fiverr">F</a>
+                <a href="#" className="social-icon" title="LinkedIn">in</a>
                 <a href="#" className="social-icon" title="Instagram">📸</a>
-                <a href="#" className="social-icon" title="LinkedIn">💼</a>
-                <a href="#" className="social-icon" title="GitHub">🐙</a>
+                <a href="#" className="social-icon" title="X">𝕏</a>
               </div>
             </div>
           </motion.div>
@@ -145,72 +156,98 @@ export function ContactEnhanced() {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <form onSubmit={handleSubmit} className="contact-form glass-strong">
-              <div className="form-row">
-                <div className="form-group">
-                  <label htmlFor="name">Name</label>
-                  <input
-                    id="name"
-                    type="text"
-                    name="name"
-                    placeholder="Your Name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    required
-                    className="glass-input"
-                  />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="email">Email</label>
-                  <input
-                    id="email"
-                    type="email"
-                    name="email"
-                    placeholder="Your Email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    required
-                    className="glass-input"
-                  />
-                </div>
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="subject">Subject</label>
-                <input
-                  id="subject"
-                  type="text"
-                  name="subject"
-                  placeholder="Subject"
-                  value={formData.subject}
-                  onChange={handleChange}
-                  required
-                  className="glass-input"
-                />
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="message">Message</label>
-                <textarea
-                  id="message"
-                  name="message"
-                  placeholder="Tell us about your project..."
-                  rows={6}
-                  value={formData.message}
-                  onChange={handleChange}
-                  required
-                  className="glass-input"
-                ></textarea>
-              </div>
-
-              <div className="contact-form-actions">
-                <button type="submit" className="glass-button-lg w-full">
-                  Send Message
-                  <span className="button-glow"></span>
+            {submitted ? (
+              <div className="glass-strong p-8 rounded-3xl text-center space-y-4">
+                <div className="text-5xl">✅</div>
+                <h3 className="text-2xl font-bold text-white">Message Sent Successfully!</h3>
+                <p className="text-white/60">Thank you for reaching out to Red Shadow Designs. We will respond within 24 hours.</p>
+                <button onClick={() => setSubmitted(false)} className="glass-button-lg px-6 py-2 text-sm mt-4">
+                  Send Another Message
                 </button>
-                <p className="contact-form-note">Response in under 24 hours for qualified inquiries.</p>
               </div>
-            </form>
+            ) : (
+              <form 
+                name="contact" 
+                method="POST" 
+                data-netlify="true" 
+                data-netlify-honeypot="bot-field"
+                onSubmit={handleSubmit} 
+                className="contact-form glass-strong"
+              >
+                {/* Hidden input for Netlify Form detection */}
+                <input type="hidden" name="form-name" value="contact" />
+                <p className="hidden">
+                  <label>
+                    Don’t fill this out if you’re human: <input name="bot-field" />
+                  </label>
+                </p>
+
+                <div className="form-row">
+                  <div className="form-group">
+                    <label htmlFor="name">Name</label>
+                    <input
+                      id="name"
+                      type="text"
+                      name="name"
+                      placeholder="Your Name"
+                      value={formData.name}
+                      onChange={handleChange}
+                      required
+                      className="glass-input"
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="email">Email</label>
+                    <input
+                      id="email"
+                      type="email"
+                      name="email"
+                      placeholder="Your Email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      required
+                      className="glass-input"
+                    />
+                  </div>
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="subject">Subject</label>
+                  <input
+                    id="subject"
+                    type="text"
+                    name="subject"
+                    placeholder="Subject"
+                    value={formData.subject}
+                    onChange={handleChange}
+                    required
+                    className="glass-input"
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="message">Message</label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    placeholder="Tell us about your project..."
+                    rows={6}
+                    value={formData.message}
+                    onChange={handleChange}
+                    required
+                    className="glass-input"
+                  ></textarea>
+                </div>
+
+                <div className="contact-form-actions">
+                  <button type="submit" className="glass-button-lg w-full">
+                    Send Message
+                    <span className="button-glow"></span>
+                  </button>
+                  <p className="contact-form-note">Response in under 24 hours for qualified inquiries.</p>
+                </div>
+              </form>
+            )}
           </motion.div>
         </div>
       </div>

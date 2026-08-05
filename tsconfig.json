@@ -15,7 +15,7 @@
     "incremental": true,
     "tsBuildInfoFile": "./node_modules/typescript/tsbuildinfo",
     "baseUrl": ".",
-    "types": ["node"],
+    "types": ["node", "next"],
     "paths": {
       "@/*": ["./*"],
       "@shared/*": ["./lib/shared/*"]

@@ -39,8 +39,11 @@ export default function ContactPageClient() {
           </p>
         </section>
 
-        {/* Full-Width Dark Map */}
-        <div className="w-full h-[50vh] md:h-[60vh] relative border-y border-white/10 overflow-hidden">
+        {/* Contact Form & Info Section */}
+        <ContactEnhanced />
+
+        {/* Full-Width Dark Map (Shifted after Contact Form & Info) */}
+        <div className="w-full h-[45vh] md:h-[55vh] relative border-t border-white/10 overflow-hidden mt-16">
           <div className="absolute top-0 left-0 right-0 h-16 bg-gradient-to-b from-[#02040a] to-transparent z-10 pointer-events-none" />
           <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-[#02040a] to-transparent z-10 pointer-events-none" />
           <iframe
@@ -54,9 +57,6 @@ export default function ContactPageClient() {
             title="Red Shadow Designs Office — Islamabad, Pakistan"
           />
         </div>
-
-        {/* Contact Form Section */}
-        <ContactEnhanced />
 
       </main>
     </div>

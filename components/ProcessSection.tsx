@@ -6,23 +6,38 @@ import { motion, useScroll, useTransform } from "framer-motion";
 const steps = [
   {
     number: "01",
-    title: "Requirements & Tolerances",
-    description: "We begin by analyzing the mechanical constraints, material specifications, and kinematic requirements to establish a flawless engineering baseline."
+    title: "Requirements and Dimensions",
+    description: "We analyze technical drawings, customer specifications, envelope dimensions, and tolerance limits to define exact engineering parameters."
   },
   {
     number: "02",
-    title: "Parametric CAD Modeling",
-    description: "Our engineers build robust, fully-parametric 3D assemblies using industry-standard tools, ensuring every component is ready for manufacturing."
+    title: "Feasibility Test",
+    description: "Evaluating structural viability, stress performance, and material suitability before committing to full 3D modeling."
   },
   {
     number: "03",
-    title: "Kinematic Testing & DFM",
-    description: "We simulate mechanical movements, perform stress tests, and execute Design for Manufacturing (DFM) checks to guarantee real-world viability."
+    title: "Draft Design",
+    description: "Creating initial parametric 3D CAD models and spatial layouts for early design review and geometric alignment."
   },
   {
     number: "04",
-    title: "Cinematic Render & Handoff",
-    description: "Finally, we produce photorealistic product visualizations for marketing and deliver production-ready STEP/STL files for manufacturing."
+    title: "Rapid Prototyping",
+    description: "Iterating and refining 3D digital prototypes for physical validation, ergonomics, and component fit testing."
+  },
+  {
+    number: "05",
+    title: "DFM (Manufacturing Ready Model)",
+    description: "Finalizing production-grade CAD models with draft angles, wall thicknesses, and STEP/STL exports for injection molding, CNC, or 3D printing."
+  },
+  {
+    number: "06",
+    title: "Renders",
+    description: "Producing studio-quality photorealistic product visualizations with realistic materials, textures, and lighting environments."
+  },
+  {
+    number: "07",
+    title: "Animations",
+    description: "Delivering exploded view assembly animations, 360° turntables, and functional mechanism videos for marketing and investor decks."
   }
 ];
 
@@ -33,7 +48,7 @@ export default function ProcessSection() {
     offset: ["start end", "end start"]
   });
 
-  const lineHeight = useTransform(scrollYProgress, [0.2, 0.8], ["0%", "100%"]);
+  const lineHeight = useTransform(scrollYProgress, [0.1, 0.9], ["0%", "100%"]);
 
   return (
     <section ref={containerRef} className="relative w-full py-32 bg-transparent z-10">
@@ -47,7 +62,7 @@ export default function ProcessSection() {
             Our <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#7c3aed] to-[#00d4ff]">Process</span>
           </h2>
           <p className="text-white/60 max-w-2xl mx-auto text-sm md:text-base leading-relaxed">
-            A systematic approach to transforming complex engineering challenges into immersive digital art.
+            Our 7-step engineering & design workflow guarantees precision, manufacturing readiness, and stunning visual presentation.
           </p>
         </div>
 
@@ -59,7 +74,7 @@ export default function ProcessSection() {
             style={{ height: lineHeight }}
           />
 
-          <div className="space-y-16">
+          <div className="space-y-12">
             {steps.map((step, index) => {
               return (
                 <div key={index} className="relative flex items-center w-full">
@@ -75,14 +90,14 @@ export default function ProcessSection() {
                       initial={{ opacity: 0, x: 30 }}
                       whileInView={{ opacity: 1, x: 0 }}
                       viewport={{ once: true, margin: "-100px" }}
-                      transition={{ duration: 0.7, delay: 0.1 }}
+                      transition={{ duration: 0.6, delay: 0.05 }}
                       className="glass-strong p-6 md:p-8 rounded-3xl relative overflow-hidden group transition-colors duration-500 w-full"
                     >
-                      <div className="absolute -right-4 -top-4 text-8xl font-black text-white/5 font-mono pointer-events-none select-none">
+                      <div className="absolute -right-4 -top-4 text-7xl font-black text-white/5 font-mono pointer-events-none select-none">
                         {step.number}
                       </div>
                       
-                      <h3 className="text-xl md:text-2xl font-bold text-white mb-4 flex items-center gap-3">
+                      <h3 className="text-xl md:text-2xl font-bold text-white mb-3 flex items-center gap-3">
                         <span className="text-[#00d4ff] font-mono text-sm">{step.number}.</span>
                         {step.title}
                       </h3>

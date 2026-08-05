@@ -2,12 +2,6 @@
 
 /**
  * NavigationResponsive.tsx - Mobile-Responsive Navigation
- * 
- * Features:
- * - Mobile hamburger menu
- * - Glassmorphism design
- * - Smooth animations
- * - Responsive layout
  */
 
 import { useState, useEffect } from 'react';
@@ -53,7 +47,7 @@ export function NavigationResponsive() {
   return (
     <nav className={`nav-responsive ${scrolled ? 'scrolled' : ''}`}>
       <div className="nav-container">
-        {/* Logo */}
+        {/* Prominent High-Resolution RS Logo */}
         <motion.div
           className="nav-logo"
           initial={{ opacity: 0, x: -20 }}
@@ -61,8 +55,11 @@ export function NavigationResponsive() {
           transition={{ duration: 0.5 }}
         >
           <Link href="/" className="nav-logo-link">
-            <img src="/assets/logo.png" alt="Red Shadow Designs" className="logo-image" />
-            <span className="logo-text">Red Shadow Design</span>
+            <img 
+              src="/assets/logo.png" 
+              alt="Red Shadow Designs" 
+              className="logo-image" 
+            />
           </Link>
         </motion.div>
 
