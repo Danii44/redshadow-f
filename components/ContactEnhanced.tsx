@@ -1,7 +1,7 @@
 "use client";
 
 /**
- * ContactEnhanced.tsx - Contact Section with Netlify Form & Glassmorphism
+ * ContactEnhanced.tsx - Contact Section with Web3Forms Integration & Glassmorphism
  */
 
 import { useEffect, useRef, useState } from 'react';
@@ -22,6 +22,7 @@ export function ContactEnhanced() {
     message: '',
   });
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
 
   useEffect(() => {
     if (!sectionRef.current || !bgRef.current) return;
@@ -52,27 +53,41 @@ export function ContactEnhanced() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
-    // Encode form body for Netlify Forms AJAX submission
-    const encode = (data: Record<string, string>) => {
-      return Object.keys(data)
-        .map((key) => encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
-        .join('&');
+    setSubmitting(true);
+
+    const payload = {
+      access_key: "96bf085a-5410-4a8f-9048-3533423c4735",
+      name: formData.name,
+      email: formData.email,
+      subject: `[Red Shadow Contact] ${formData.subject}`,
+      message: formData.message,
+      from_name: "Red Shadow Designs Portfolio"
     };
 
-    fetch('/', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: encode({
-        'form-name': 'contact',
-        ...formData,
-      }),
+    fetch("https://api.web3forms.com/submit", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      body: JSON.stringify(payload)
     })
-      .then(() => {
-        setSubmitted(true);
-        setFormData({ name: '', email: '', subject: '', message: '' });
+      .then((res) => res.json())
+      .then((data) => {
+        setSubmitting(false);
+        if (data.success) {
+          setSubmitted(true);
+          setFormData({ name: '', email: '', subject: '', message: '' });
+        } else {
+          console.error("Web3Forms submission failed:", data);
+          alert("Submission failed. Please try again or email us directly.");
+        }
       })
-      .catch((error) => console.error('Form submission error:', error));
+      .catch((error) => {
+        setSubmitting(false);
+        console.error("Form submission error:", error);
+        alert("An error occurred. Please try again.");
+      });
   };
 
   return (
@@ -166,22 +181,7 @@ export function ContactEnhanced() {
                 </button>
               </div>
             ) : (
-              <form 
-                name="contact" 
-                method="POST" 
-                data-netlify="true" 
-                data-netlify-honeypot="bot-field"
-                onSubmit={handleSubmit} 
-                className="contact-form glass-strong"
-              >
-                {/* Hidden input for Netlify Form detection */}
-                <input type="hidden" name="form-name" value="contact" />
-                <p className="hidden">
-                  <label>
-                    Don’t fill this out if you’re human: <input name="bot-field" />
-                  </label>
-                </p>
-
+              <form onSubmit={handleSubmit} className="contact-form glass-strong">
                 <div className="form-row">
                   <div className="form-group">
                     <label htmlFor="name">Name</label>
@@ -240,8 +240,8 @@ export function ContactEnhanced() {
                 </div>
 
                 <div className="contact-form-actions">
-                  <button type="submit" className="glass-button-lg w-full">
-                    Send Message
+                  <button type="submit" disabled={submitting} className="glass-button-lg w-full">
+                    {submitting ? "Sending..." : "Send Message"}
                     <span className="button-glow"></span>
                   </button>
                   <p className="contact-form-note">Response in under 24 hours for qualified inquiries.</p>

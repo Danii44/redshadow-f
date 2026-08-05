@@ -90,17 +90,6 @@ export const metadata: Metadata = {
   referrer: 'origin-when-cross-origin',
   category: 'Design & Engineering',
 
-  // Favicon & Icons
-  icons: {
-    icon: [
-      { url: '/favicon.ico' },
-      { url: '/icon0.svg', type: 'image/svg+xml' },
-      { url: '/icon1.png', type: 'image/png' },
-    ],
-    apple: [
-      { url: '/apple-icon.png' },
-    ],
-  },
 };
 
 // JSON-LD Structured Data for AEO / GEO (Answer Engine & Generative AI)
