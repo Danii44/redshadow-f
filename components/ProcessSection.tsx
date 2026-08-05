@@ -51,50 +51,47 @@ export default function ProcessSection() {
           </p>
         </div>
 
-        <div className="relative max-w-4xl mx-auto">
+        <div className="relative max-w-3xl mx-auto pl-8 md:pl-16">
           {/* Vertical Connecting Line */}
-          <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-px bg-white/10 -translate-x-1/2 hidden md:block" />
+          <div className="absolute left-0 top-0 bottom-0 w-px bg-white/10" />
           <motion.div 
-            className="absolute left-8 md:left-1/2 top-0 w-1 bg-gradient-to-b from-[#00d4ff] to-[#7c3aed] -translate-x-1/2 hidden md:block rounded-full shadow-[0_0_15px_rgba(0,212,255,0.5)]"
+            className="absolute left-0 top-0 w-1 bg-gradient-to-b from-[#00d4ff] to-[#7c3aed] rounded-full shadow-[0_0_15px_rgba(0,212,255,0.5)] -translate-x-[1.5px]"
             style={{ height: lineHeight }}
           />
 
-          <div className="space-y-16 md:space-y-24">
+          <div className="space-y-16">
             {steps.map((step, index) => {
-              const isEven = index % 2 === 0;
               return (
-                <div key={index} className={`relative flex flex-col md:flex-row items-center ${isEven ? 'md:flex-row' : 'md:flex-row-reverse'} gap-8 md:gap-16`}>
+                <div key={index} className="relative flex items-center w-full">
                   
-                  {/* Timeline Dot (Desktop) */}
-                  <div className="hidden md:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-[#0a0a0a] border-2 border-[rgba(0,212,255,0.4)] items-center justify-center z-10 shadow-[0_0_20px_rgba(124,58,237,0.2)]">
-                    <div className="w-4 h-4 rounded-full bg-gradient-to-r from-[#00d4ff] to-[#7c3aed]" />
+                  {/* Timeline Dot */}
+                  <div className="absolute -left-8 md:-left-16 w-10 h-10 md:w-12 md:h-12 rounded-full bg-[#0a0a0a] border-2 border-[rgba(0,212,255,0.4)] flex items-center justify-center z-10 shadow-[0_0_20px_rgba(124,58,237,0.2)] -translate-x-1/2">
+                    <div className="w-3 h-3 md:w-4 md:h-4 rounded-full bg-gradient-to-r from-[#00d4ff] to-[#7c3aed]" />
                   </div>
 
                   {/* Content Card */}
-                  <div className={`w-full md:w-1/2 flex ${isEven ? 'md:justify-end md:pr-12 lg:pr-16' : 'md:justify-start md:pl-12 lg:pl-16'}`}>
+                  <div className="w-full">
                     <motion.div 
-                      initial={{ opacity: 0, y: 30, x: isEven ? -30 : 30 }}
-                      whileInView={{ opacity: 1, y: 0, x: 0 }}
+                      initial={{ opacity: 0, x: 30 }}
+                      whileInView={{ opacity: 1, x: 0 }}
                       viewport={{ once: true, margin: "-100px" }}
                       transition={{ duration: 0.7, delay: 0.1 }}
-                      className="glass-strong p-8 rounded-3xl relative overflow-hidden group hover:border-[rgba(0,212,255,0.4)] transition-colors duration-500 w-full max-w-md"
+                      className="glass-strong p-6 md:p-8 rounded-3xl relative overflow-hidden group transition-colors duration-500 w-full"
                     >
-                      <div className="absolute -right-4 -top-4 text-8xl font-black text-white/5 font-mono group-hover:text-[rgba(0,212,255,0.05)] transition-colors duration-500 pointer-events-none select-none">
+                      <div className="absolute -right-4 -top-4 text-8xl font-black text-white/5 font-mono pointer-events-none select-none">
                         {step.number}
                       </div>
                       
-                      <h3 className="text-2xl font-bold text-white mb-4 flex items-center gap-4">
+                      <h3 className="text-xl md:text-2xl font-bold text-white mb-4 flex items-center gap-3">
                         <span className="text-[#00d4ff] font-mono text-sm">{step.number}.</span>
                         {step.title}
                       </h3>
-                      <p className="text-white/60 leading-relaxed text-sm">
+                      <p className="text-white/60 leading-relaxed text-sm md:text-base">
                         {step.description}
                       </p>
                     </motion.div>
                   </div>
 
-                  {/* Empty space for the other side on desktop */}
-                  <div className="hidden md:block w-1/2" />
                 </div>
               );
             })}
