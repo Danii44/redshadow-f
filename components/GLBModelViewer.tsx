@@ -12,11 +12,12 @@ gsap.registerPlugin(ScrollTrigger);
 function Model({ url }: { url: string }) {
   const group = useRef<THREE.Group>(null);
   const { scene } = useGLTF(url);
-  const { viewport } = useThree();
+  const { size } = useThree();
   const scrollProgress = useRef(0);
 
   const model = useMemo(() => {
     const clonedScene = scene.clone();
+    
     const applyMaterialTone = (material: THREE.Material) => {
       const nextMaterial = material.clone();
 
@@ -57,6 +58,7 @@ function Model({ url }: { url: string }) {
         }
       }
     });
+    
     return clonedScene;
   }, [scene]);
 
@@ -79,10 +81,14 @@ function Model({ url }: { url: string }) {
     scrollProgress.current *= 0.95;
   });
 
+  // Use R3F size to determine responsive scale safely without window hydration issues
+  const isMobile = size.width < 768;
+  const isTablet = size.width < 1024;
+
   return (
     <group
       ref={group}
-      scale={viewport.width < 600 ? 0.9 : viewport.width < 900 ? 1.05 : 1.35}
+      scale={isMobile ? 0.45 : isTablet ? 0.65 : 0.9}
       position={[0, -0.15, 0]}
     >
       <primitive object={model} />

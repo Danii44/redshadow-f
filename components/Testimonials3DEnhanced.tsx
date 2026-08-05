@@ -63,7 +63,7 @@ export default function Testimonials3DEnhanced() {
         scrollTrigger: {
           trigger: sectionRef.current,
           start: "top top",
-          end: `+=${testimonials.length * 800}`,
+          end: `+=${testimonials.length * 300}`,
           pin: true,
           scrub: 1, // Smooth scrubbing
           anticipatePin: 1

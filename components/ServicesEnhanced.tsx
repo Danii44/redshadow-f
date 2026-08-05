@@ -74,10 +74,10 @@ export default function ServicesEnhanced() {
   useEffect(() => {
     let interval: NodeJS.Timeout;
     if (hoveredIndex !== null) {
-      // Start cycling images every 800ms
+      // Start cycling images every 400ms
       interval = setInterval(() => {
         setImageIndex((prev) => prev + 1);
-      }, 800);
+      }, 400);
     } else {
       // Reset when not hovering
       setImageIndex(0);
@@ -159,7 +159,7 @@ export default function ServicesEnhanced() {
                               opacity: isActive ? 0.8 : 0,
                               scale: isActive ? 1 : 1.05
                             }}
-                            transition={{ duration: 0.5, ease: "easeInOut" }}
+                            transition={{ duration: 0 }} // Instant pop up
                             className="absolute inset-0 w-full h-full object-cover mix-blend-lighten"
                           />
                         );

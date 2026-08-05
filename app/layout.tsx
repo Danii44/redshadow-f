@@ -5,6 +5,7 @@ import { TooltipProvider } from '@/components/ui/tooltip';
 import { Toaster } from '@/components/ui/sonner';
 import NavigationResponsive from '@/components/NavigationResponsive';
 import Footer from '@/components/Footer';
+import SessionLoader from '@/components/SessionLoader';
 
 export const metadata: Metadata = {
   title: 'Red Shadow Design',
@@ -17,6 +18,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <ThemeProvider defaultTheme="dark">
           <TooltipProvider>
+            <SessionLoader />
             <Toaster />
             <NavigationResponsive />
             {children}

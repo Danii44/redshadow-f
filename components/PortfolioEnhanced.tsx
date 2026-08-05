@@ -84,7 +84,7 @@ export function PortfolioEnhanced() {
       const cards = gsap.utils.toArray<HTMLElement>('.portfolio-item-wrapper', track);
       const containerWidth = window.innerWidth;
       const distance = Math.max(track.scrollWidth - containerWidth * 0.76, 0);
-      const dragDistance = Math.max(distance + 800, 1300);
+      const dragDistance = Math.max(distance + 300, 800);
 
       gsap.set(track, {
         width: 'max-content',
