@@ -6,23 +6,23 @@ import { motion, useScroll, useTransform } from "framer-motion";
 const steps = [
   {
     number: "01",
-    title: "Concept & Strategy",
-    description: "We begin by understanding your vision, defining the technical requirements, and sketching out the blueprint for a futuristic digital experience."
+    title: "Requirements & Tolerances",
+    description: "We begin by analyzing the mechanical constraints, material specifications, and kinematic requirements to establish a flawless engineering baseline."
   },
   {
     number: "02",
-    title: "Precision Modeling",
-    description: "Our engineers and 3D artists craft highly detailed, mathematically precise models that serve as the foundation of the project."
+    title: "Parametric CAD Modeling",
+    description: "Our engineers build robust, fully-parametric 3D assemblies using industry-standard tools, ensuring every component is ready for manufacturing."
   },
   {
     number: "03",
-    title: "Cinematic Rendering",
-    description: "We apply hyper-realistic textures, complex materials, and atmospheric lighting to bring the mechanical designs to life."
+    title: "Kinematic Testing & DFM",
+    description: "We simulate mechanical movements, perform stress tests, and execute Design for Manufacturing (DFM) checks to guarantee real-world viability."
   },
   {
     number: "04",
-    title: "Interactive Deployment",
-    description: "Finally, we integrate the 3D assets into a fluid, high-performance web experience using WebGL and advanced scroll animations."
+    title: "Cinematic Render & Handoff",
+    description: "Finally, we produce photorealistic product visualizations for marketing and deliver production-ready STEP/STL files for manufacturing."
   }
 ];
 
@@ -71,7 +71,7 @@ export default function ProcessSection() {
                   </div>
 
                   {/* Content Card */}
-                  <div className={`w-full md:w-1/2 flex ${isEven ? 'md:justify-end' : 'md:justify-start'}`}>
+                  <div className={`w-full md:w-1/2 flex ${isEven ? 'md:justify-end md:pr-12 lg:pr-16' : 'md:justify-start md:pl-12 lg:pl-16'}`}>
                     <motion.div 
                       initial={{ opacity: 0, y: 30, x: isEven ? -30 : 30 }}
                       whileInView={{ opacity: 1, y: 0, x: 0 }}

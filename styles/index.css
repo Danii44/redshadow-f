@@ -318,7 +318,7 @@
       rgba(255, 255, 255, 0.1) 0%,
       rgba(255, 255, 255, 0.05) 100%
     );
-    border: 1px solid rgba(0, 200, 255, 0.2);
+    border: none;
     position: relative;
     overflow: hidden;
   }
@@ -345,7 +345,7 @@
       rgba(255, 255, 255, 0.1) 0%,
       rgba(255, 255, 255, 0.04) 100%
     );
-    border: 1px solid rgba(255, 255, 255, 0.14);
+    border: none;
     box-shadow:
       0 10px 30px rgba(0, 0, 0, 0.28),
       inset 0 1px 1px rgba(255, 255, 255, 0.12);
@@ -375,7 +375,7 @@
       rgba(255, 255, 255, 0.08) 0%,
       rgba(255, 255, 255, 0.03) 100%
     );
-    border: 1px solid rgba(0, 200, 255, 0.3);
+    border: none;
     box-shadow: 
       0 4px 16px rgba(0, 0, 0, 0.3),
       inset 0 1px 1px rgba(255, 255, 255, 0.15),
@@ -391,7 +391,7 @@
       rgba(255, 255, 255, 0.05) 0%,
       rgba(255, 255, 255, 0.02) 100%
     );
-    border: 1px solid rgba(0, 200, 255, 0.15);
+    border: none;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
   }
 
@@ -432,11 +432,7 @@
       rgba(255, 255, 255, 0.15) 0%,
       rgba(255, 255, 255, 0.08) 100%
     );
-    border-image: linear-gradient(
-      135deg,
-      rgba(0, 200, 255, 0.8) 0%,
-      rgba(124, 58, 237, 0.6) 100%
-    ) 1;
+    border: none;
     box-shadow: 
       0 12px 48px rgba(0, 0, 0, 0.5),
       inset 0 1px 2px rgba(255, 255, 255, 0.3),
@@ -453,7 +449,7 @@
       rgba(255, 255, 255, 0.12) 0%,
       rgba(255, 255, 255, 0.05) 100%
     );
-    border-color: rgba(0, 200, 255, 0.6);
+    border: none;
     box-shadow: 
       0 8px 24px rgba(0, 0, 0, 0.4),
       inset 0 1px 1px rgba(255, 255, 255, 0.2),
@@ -477,7 +473,7 @@
       rgba(255, 255, 255, 0.08) 0%,
       rgba(255, 255, 255, 0.03) 100%
     );
-    border: 1px solid rgba(255, 255, 255, 0.12);
+    border: none;
     box-shadow:
       0 8px 24px rgba(0, 0, 0, 0.25),
       inset 0 1px 1px rgba(255, 255, 255, 0.08);
@@ -485,7 +481,7 @@
 
   .glass-card:hover {
     transform: translateY(-4px);
-    border-color: rgba(255, 255, 255, 0.2);
+    border: none;
     box-shadow:
       0 12px 32px rgba(0, 0, 0, 0.32),
       inset 0 1px 1px rgba(255, 255, 255, 0.12);
@@ -546,8 +542,8 @@
       rgba(10, 10, 10, 0.8) 0%,
       rgba(26, 10, 46, 0.6) 100%
     );
-    border-top: 1px solid rgba(0, 200, 255, 0.1);
-    border-bottom: 1px solid rgba(0, 200, 255, 0.1);
+    border-top: none;
+    border-bottom: none;
   }
 
   .glass-section::before {

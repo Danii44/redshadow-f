@@ -10,6 +10,7 @@ import AboutSection from '@/components/AboutSection';
 import Testimonials3DEnhanced from '@/components/Testimonials3DEnhanced';
 import VideoSection from '@/components/VideoSection';
 import ClientMarqueeSection from '@/components/ClientMarqueeSection';
+import FAQSection from '@/components/FAQSection';
 
 export default function Page() {
   const [scrollY, setScrollY] = useState(0);
@@ -43,6 +44,7 @@ export default function Page() {
         <PortfolioEnhanced />
         <ProcessSection />
         <Testimonials3DEnhanced />
+        <FAQSection />
         <ContactEnhanced />
       </main>
     </div>
