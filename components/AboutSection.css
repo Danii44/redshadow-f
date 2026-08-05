@@ -152,6 +152,7 @@
 
   .about-container {
     gap: 2rem;
+    padding: 0 1.25rem;
   }
 
   .about-content h2 {

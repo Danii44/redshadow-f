@@ -152,6 +152,50 @@
   z-index: 1;
 }
 
+/* ============================================================================
+   GLOBAL MOBILE SAFE PADDING
+   Ensures every section has proper horizontal breathing room on phones.
+   Specific component CSS can still override for individual needs.
+   ============================================================================ */
+@media (max-width: 768px) {
+  /* Give all direct section wrappers horizontal padding */
+  .services-content-container,
+  .portfolio-header-container,
+  .contact-content-container,
+  .about-container {
+    padding-left: 1.25rem !important;
+    padding-right: 1.25rem !important;
+  }
+
+  /* Tailwind-inline sections (ServicesPageClient, AboutPageClient etc.) */
+  .homepage-main > section,
+  .homepage-main > div > section {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+
+  /* FAQ & Testimonials inner wrappers */
+  .max-w-4xl,
+  .max-w-7xl,
+  .max-w-5xl,
+  .max-w-3xl,
+  .max-w-2xl,
+  .max-w-lg {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .services-content-container,
+  .portfolio-header-container,
+  .contact-content-container,
+  .about-container {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+}
+
 .ambient-layer {
   position: absolute;
   pointer-events: none;
@@ -636,3 +680,54 @@
     transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
   }
 }
+
+/* ============================================================================
+   CUSTOM SCROLLBAR — Desktop only, matches Red Shadow Designs theme
+   ============================================================================ */
+
+@media (min-width: 768px) {
+  /* Firefox */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: #00d4ff #0a0a14;
+  }
+
+  /* Webkit (Chrome, Safari, Edge) */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #0a0a14;
+    border-radius: 999px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #00d4ff 0%, #7c3aed 100%);
+    border-radius: 999px;
+    border: 1px solid rgba(0, 212, 255, 0.15);
+    box-shadow: 0 0 8px rgba(0, 212, 255, 0.4);
+    transition: background 0.3s ease;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #7c3aed 0%, #00d4ff 100%);
+    box-shadow: 0 0 14px rgba(0, 212, 255, 0.6);
+  }
+
+  ::-webkit-scrollbar-corner {
+    background: #0a0a14;
+  }
+}
+
+/* Mobile — hide scrollbar completely */
+@media (max-width: 767px) {
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  * {
+    scrollbar-width: none;
+  }
+}
+

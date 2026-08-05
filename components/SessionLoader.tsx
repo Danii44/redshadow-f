@@ -9,21 +9,25 @@ export default function SessionLoader() {
   const [isFading, setIsFading] = useState(false);
 
   useEffect(() => {
-    // Run unconditionally on mount
     setShowLoader(true);
-    
-    // Wait 3 seconds, then trigger fade out
+    // Hide scrollbar while loader is visible
+    document.documentElement.style.overflow = 'hidden';
+
     const timer = setTimeout(() => {
       setIsFading(true);
-      
-      // Fully remove from DOM after fade animation (0.8s) completes
+
       setTimeout(() => {
         setShowLoader(false);
+        // Restore scrollbar after loader fully disappears
+        document.documentElement.style.overflow = '';
       }, 800);
-      
+
     }, 3000);
 
-    return () => clearTimeout(timer);
+    return () => {
+      clearTimeout(timer);
+      document.documentElement.style.overflow = '';
+    };
   }, []);
 
   // If it's not the first load, return null immediately so it doesn't block the screen

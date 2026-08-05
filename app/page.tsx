@@ -1,36 +1,24 @@
 "use client";
 
-import { type CSSProperties, useEffect, useState } from 'react';
-import HeroModelSection from '@/components/HeroModelSection';
-import ServicesEnhanced from '@/components/ServicesEnhanced';
-import PortfolioEnhanced from '@/components/PortfolioEnhanced';
-import ProcessSection from '@/components/ProcessSection';
-import ContactEnhanced from '@/components/ContactEnhanced';
-import AboutSection from '@/components/AboutSection';
-import Testimonials3DEnhanced from '@/components/Testimonials3DEnhanced';
-import VideoSection from '@/components/VideoSection';
-import ClientMarqueeSection from '@/components/ClientMarqueeSection';
-import FAQSection from '@/components/FAQSection';
+import dynamic from 'next/dynamic';
+
+// Dynamically import all sections with ssr:false — this is the permanent fix
+// for the removeChild hydration mismatch crash on mobile.
+// SSR renders nothing for these; client mounts them cleanly after hydration.
+const HeroModelSection   = dynamic(() => import('@/components/HeroModelSection'),    { ssr: false });
+const AboutSection       = dynamic(() => import('@/components/AboutSection'),         { ssr: false });
+const VideoSection       = dynamic(() => import('@/components/VideoSection'),         { ssr: false });
+const ServicesEnhanced   = dynamic(() => import('@/components/ServicesEnhanced'),     { ssr: false });
+const ClientMarqueeSection = dynamic(() => import('@/components/ClientMarqueeSection'), { ssr: false });
+const PortfolioEnhanced  = dynamic(() => import('@/components/PortfolioEnhanced'),    { ssr: false });
+const ProcessSection     = dynamic(() => import('@/components/ProcessSection'),       { ssr: false });
+const Testimonials3DEnhanced = dynamic(() => import('@/components/Testimonials3DEnhanced'), { ssr: false });
+const FAQSection         = dynamic(() => import('@/components/FAQSection'),           { ssr: false });
+const ContactEnhanced    = dynamic(() => import('@/components/ContactEnhanced'),      { ssr: false });
 
 export default function Page() {
-  const [scrollY, setScrollY] = useState(0);
-
-  useEffect(() => {
-    const handleScroll = () => setScrollY(window.scrollY);
-
-    handleScroll();
-    window.addEventListener('scroll', handleScroll, { passive: true });
-
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  const ambientStyle = {
-    '--scroll-offset': `${Math.min(scrollY * 0.12, 120)}px`,
-    '--scroll-rise': `${Math.min(scrollY * 0.08, 70)}px`,
-  } as CSSProperties;
-
   return (
-    <div className="homepage-shell" style={ambientStyle}>
+    <div className="homepage-shell">
       <div className="ambient-layer ambient-layer-a" />
       <div className="ambient-layer ambient-layer-b" />
       <div className="ambient-grid" />

@@ -204,7 +204,9 @@ function DesktopTestimonials() {
 }
 
 export default function Testimonials3DEnhanced() {
-  const [isMobile, setIsMobile] = useState(false);
+  // Use null as initial state so server + client both render nothing until mounted
+  // This prevents the SSR/hydration mismatch that causes removeChild crash on mobile
+  const [isMobile, setIsMobile] = useState<boolean | null>(null);
 
   useEffect(() => {
     const check = () => setIsMobile(window.innerWidth < 768);
@@ -212,6 +214,10 @@ export default function Testimonials3DEnhanced() {
     window.addEventListener('resize', check);
     return () => window.removeEventListener('resize', check);
   }, []);
+
+  // Render nothing on the server and on first client paint (before useEffect runs)
+  // Both SSR and initial hydration produce an empty fragment → no mismatch
+  if (isMobile === null) return null;
 
   return isMobile ? <MobileTestimonials /> : <DesktopTestimonials />;
 }

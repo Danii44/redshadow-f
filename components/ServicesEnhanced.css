@@ -189,17 +189,39 @@
   .services-section-wrapper {
     padding: 5rem 0;
   }
+
+  .services-content-container {
+    padding: 0 1.25rem;
+    border-radius: 24px;
+  }
   
   .services-grid {
     grid-template-columns: 1fr;
-    gap: 2rem;
+    gap: 1.5rem;
   }
   
   .service-card {
-    padding: 2rem;
+    padding: 1.5rem;
   }
   
   .services-cta {
-    padding: 2.5rem 1.5rem;
+    padding: 2rem 1.25rem;
+    border-radius: 20px;
+  }
+
+  .services-title {
+    font-size: 2rem;
   }
 }
+
+@media (max-width: 480px) {
+  .services-content-container {
+    padding: 0 1rem;
+    border-radius: 16px;
+  }
+
+  .service-card {
+    padding: 1.25rem;
+  }
+}
+
