@@ -1,4 +1,5 @@
 @import '../styles/index.css';
+@import '../styles/light-mode.css';
 @import '../components/ContactEnhanced.css';
 @import '../components/Footer.css';
 @import '../components/HeroModelSection.css';
