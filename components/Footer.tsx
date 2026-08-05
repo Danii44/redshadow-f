@@ -29,8 +29,8 @@ export function Footer() {
             <div className="footer-logo-wrap">
               <img src="/assets/logo.png" alt="Red Shadow Design" className="footer-logo-image" />
             </div>
-            <h3>Red Shadow Design</h3>
-            <p>Premium 3D engineering and design solutions for ambitious next-generation brands.</p>
+            <h3>Red Shadow Designs</h3>
+            <p>Premium CAD modeling, 3D rendering and industrial design studio — Islamabad, Pakistan.</p>
           </motion.div>
 
           <motion.div
@@ -74,16 +74,16 @@ export function Footer() {
           >
             <h4>Follow Us</h4>
             <div className="social-icons">
-              <a href="#" className="social-icon" title="Twitter">𝕏</a>
+              <a href="https://www.fiverr.com/daniyalahmad7" target="_blank" rel="noopener noreferrer" className="social-icon" title="Fiverr">F</a>
               <a href="#" className="social-icon" title="LinkedIn">in</a>
               <a href="#" className="social-icon" title="Instagram">📷</a>
-              <a href="#" className="social-icon" title="GitHub">⚙️</a>
+              <a href="#" className="social-icon" title="Twitter">𝕏</a>
             </div>
           </motion.div>
         </div>
 
         <div className="footer-bottom">
-          <p>&copy; {currentYear} Red Shadow Design. All rights reserved.</p>
+          <p>&copy; {currentYear} Red Shadow Designs. All rights reserved.</p>
           <div className="footer-legal">
             <a href="#privacy">Privacy Policy</a>
             <span>•</span>

@@ -1,5 +1,34 @@
 import Link from 'next/link';
 import { ArrowLeft, CheckCircle2 } from 'lucide-react';
+import type { Metadata } from 'next';
+
+const SERVICE_IDS = [
+  'cad-modeling',
+  '3d-rendering',
+  'product-design',
+  'industrial-design',
+  'medical-device-modeling',
+  'engineering-visualization',
+];
+
+export function generateStaticParams() {
+  return SERVICE_IDS.map((id) => ({ id }));
+}
+
+export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
+  const { id } = await params;
+  const title = id.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+  return {
+    title: `${title} | Services — Red Shadow Designs`,
+    description: `${title} services by Red Shadow Designs — precision engineering and 3D rendering studio in Islamabad, Pakistan.`,
+    alternates: { canonical: `https://www.redshadowdesigns.com/services/${id}` },
+    openGraph: {
+      title: `${title} | Red Shadow Designs`,
+      url: `https://www.redshadowdesigns.com/services/${id}`,
+    },
+  };
+}
+
 
 export default async function ServicePage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;

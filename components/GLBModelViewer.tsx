@@ -123,18 +123,21 @@ export function GLBModelViewer() {
     );
   }
 
+  // On mobile cap DPR to 1 for better performance
+  const isMobileDevice = typeof window !== 'undefined' && window.innerWidth < 768;
+
   return (
     <div className="h-full w-full overflow-hidden">
       <Canvas
         camera={{ position: [0, 0, 4], fov: 42 }}
-        dpr={[1, 1.5]}
-        shadows
+        dpr={isMobileDevice ? [1, 1] : [1, 1.5]}
+        shadows={!isMobileDevice}
         tabIndex={-1}
-        gl={{ antialias: true, alpha: true, powerPreference: 'high-performance' }}
+        gl={{ antialias: !isMobileDevice, alpha: true, powerPreference: 'high-performance' }}
         style={{ width: '100%', height: '100%', background: 'linear-gradient(135deg, #0a0a0a 0%, #1a0033 100%)' }}
         onCreated={(state) => {
           state.gl.setClearColor('#09010f');
-          state.gl.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
+          state.gl.setPixelRatio(isMobileDevice ? 1 : Math.min(window.devicePixelRatio, 1.5));
           state.gl.domElement.tabIndex = -1;
           state.gl.domElement.style.border = 'none';
           state.gl.domElement.style.outline = 'none';
@@ -142,7 +145,8 @@ export function GLBModelViewer() {
         }}
       >
         <Suspense fallback={null}>
-          <PresentationControls speed={1.5} global zoom={1} rotation={[0, 0, 0]}>
+          {/* Higher speed on mobile so touch drag feels snappy and responsive */}
+          <PresentationControls speed={isMobileDevice ? 3.5 : 1.5} global zoom={1} rotation={[0, 0, 0]}>
             <Model url={modelUrl} />
           </PresentationControls>
 

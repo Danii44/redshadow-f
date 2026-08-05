@@ -1,5 +1,40 @@
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
+import type { Metadata } from 'next';
+
+const PROJECT_IDS = [
+  'orbai-spherical-drone',
+  'f1-car-keychain',
+  'tkr-implant',
+  'ketchup-cap',
+  'bull-lock',
+  'taupe-urn',
+  'compressor-chamber',
+  'hero-render',
+  'makeup-stick',
+  'camera-housing',
+  'bamboo-toothbrush',
+  'open-assembly',
+];
+
+export function generateStaticParams() {
+  return PROJECT_IDS.map((id) => ({ id }));
+}
+
+export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
+  const { id } = await params;
+  const title = id.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+  return {
+    title: `${title} | Portfolio — Red Shadow Designs`,
+    description: `View the ${title} project by Red Shadow Designs — precision CAD modeling and 3D rendering studio in Islamabad, Pakistan.`,
+    alternates: { canonical: `https://www.redshadowdesigns.com/portfolio/${id}` },
+    openGraph: {
+      title: `${title} | Red Shadow Designs`,
+      description: `Precision-engineered ${title} — CAD modeling and 3D rendering by Red Shadow Designs.`,
+      url: `https://www.redshadowdesigns.com/portfolio/${id}`,
+    },
+  };
+}
 
 export default async function PortfolioProjectPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
