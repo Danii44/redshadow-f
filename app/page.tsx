@@ -8,6 +8,8 @@ import ProcessSection from '@/components/ProcessSection';
 import ContactEnhanced from '@/components/ContactEnhanced';
 import AboutSection from '@/components/AboutSection';
 import Testimonials3DEnhanced from '@/components/Testimonials3DEnhanced';
+import VideoSection from '@/components/VideoSection';
+import ClientMarqueeSection from '@/components/ClientMarqueeSection';
 
 export default function Page() {
   const [scrollY, setScrollY] = useState(0);
@@ -35,7 +37,9 @@ export default function Page() {
       <main className="homepage-main">
         <HeroModelSection />
         <AboutSection />
+        <VideoSection />
         <ServicesEnhanced />
+        <ClientMarqueeSection />
         <PortfolioEnhanced />
         <ProcessSection />
         <Testimonials3DEnhanced />

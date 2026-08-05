@@ -7,64 +7,66 @@
  * - ScrollTrigger-pinned horizontal gallery within a vertical flow
  * - Parallax motion on project imagery while the horizontal deck moves
  * - Responsive glassmorphism card layout
+ * - Links to individual project pages
  */
 
 import { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
+import Link from 'next/link';
 import './PortfolioEnhanced.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const portfolioItems = [
   {
-    id: 1,
-    title: 'Hypercar Visualization',
-    category: 'Product Showcase',
-    description: 'Complete 3D rendering of a futuristic hypercar with cinematic lighting',
-    icon: '🏎️',
-    image: '/assets/images/backgrounds/urban-bg.jpg'
-  },
-  {
-    id: 2,
-    title: 'Mechanical Gearbox',
-    category: 'CAD Design',
-    description: 'Complex mechanical assembly with precision engineering details',
-    icon: '⚙️',
-    image: '/assets/images/backgrounds/studio-bg.jpg'
-  },
-  {
-    id: 3,
-    title: 'Drone Design',
-    category: 'Product Design',
-    description: 'Advanced drone visualization and technical drawings',
+    id: 'orbai-spherical-drone',
+    title: 'ORBAI Spherical Drone',
+    category: 'CAD Design & 3D Renders',
+    description: 'Advanced spherical drone mechanical design, precision CAD modeling, and photorealistic rendering.',
     icon: '🚁',
-    image: '/assets/images/backgrounds/night-bg.jpg'
+    image: 'https://images.unsplash.com/photo-1579820010410-c10411aaaa88?q=80&w=2697&auto=format&fit=crop'
   },
   {
-    id: 4,
-    title: 'Industrial Robot',
-    category: 'Mechanical Engineering',
-    description: 'Robotic arm assembly and motion analysis visualization',
-    icon: '🤖',
-    image: '/assets/images/backgrounds/newdrop-bg.jpg'
+    id: 'cosmetic-travel-case',
+    title: 'Multi-Slot Cosmetic Case',
+    category: 'Product Design',
+    description: 'Integrated travel case design focusing on functional compartments and sleek industrial aesthetics.',
+    icon: '✨',
+    image: 'https://images.unsplash.com/photo-1596462502278-27bfdc403348?q=80&w=2000&auto=format&fit=crop'
   },
   {
-    id: 5,
-    title: 'Engine Block',
-    category: 'Reverse Engineering',
-    description: 'Detailed engine component analysis and precision modeling',
-    icon: '🔧',
-    image: '/assets/images/backgrounds/signature-bg.jpg'
+    id: 'wall-mounted-gym',
+    title: 'Concealed Multi-Gym',
+    category: 'Industrial Design',
+    description: 'Space-saving, wall-mounted multi-gym engineered for home environments with robust mechanisms.',
+    icon: '🏋️',
+    image: 'https://images.unsplash.com/photo-1540497077202-7c8a3999166f?q=80&w=2670&auto=format&fit=crop'
   },
   {
-    id: 6,
-    title: 'Additive Manufacturing',
-    category: '3D Printing',
-    description: 'Complex geometry optimized for advanced 3D printing',
-    icon: '🖨️',
-    image: '/assets/images/backgrounds/essentials-bg.jpg'
+    id: 'f1-car-keychain',
+    title: 'F1 Race Car Keychain',
+    category: 'Precision Engineering',
+    description: 'Highly detailed, precision-engineered miniature F1 car model designed for CNC or 3D printing.',
+    icon: '🏎️',
+    image: 'https://images.unsplash.com/photo-1532981358914-7221b2bbbaaa?q=80&w=2670&auto=format&fit=crop'
+  },
+  {
+    id: 'tkr-implant',
+    title: 'Total Knee Replacement',
+    category: 'Medical Device Modeling',
+    description: 'Anatomically accurate TKR implant CAD model focusing on biomechanics and material specifications.',
+    icon: '🦴',
+    image: 'https://images.unsplash.com/photo-1582719471384-894fbb16e074?q=80&w=2564&auto=format&fit=crop'
+  },
+  {
+    id: 'autonomous-imaging-system',
+    title: '360° Imaging System',
+    category: 'Hardware Design',
+    description: 'Autonomous spherical imaging hardware featuring complex internal component packaging.',
+    icon: '📷',
+    image: 'https://images.unsplash.com/photo-1516383274235-5f42d6c6426d?q=80&w=2674&auto=format&fit=crop'
   },
 ];
 
@@ -137,7 +139,7 @@ export function PortfolioEnhanced() {
   return (
     <section ref={sectionRef} id="portfolio" className="portfolio-section-wrapper">
       <div className="portfolio-parallax-bg">
-        <img src="/assets/images/backgrounds/studio-bg.jpg" alt="Background" />
+        <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=2000&auto=format&fit=crop" alt="Background" />
         <div className="portfolio-bg-overlay"></div>
       </div>
 
@@ -159,23 +161,25 @@ export function PortfolioEnhanced() {
         <div ref={horizontalRef} className="portfolio-horizontal-container">
           {portfolioItems.map((item) => (
             <div key={item.id} className="portfolio-item-wrapper">
-              <motion.div
-                className="portfolio-item glass-card"
-                whileHover={{ y: -10, scale: 1.015, transition: { duration: 0.3 } }}
-              >
-                <div className="portfolio-item-image-box">
-                  <img src={item.image} alt={item.title} className="portfolio-item-img" />
-                  <div className="portfolio-item-icon-overlay">{item.icon}</div>
-                </div>
-                <div className="portfolio-item-info">
-                  <span className="portfolio-item-category">{item.category}</span>
-                  <h3 className="portfolio-item-title">{item.title}</h3>
-                  <p className="portfolio-item-description">{item.description}</p>
-                  <div className="portfolio-item-footer">
-                    <button className="glass-button-sm">View Details</button>
+              <Link href={`/portfolio/${item.id}`} className="block w-full h-full">
+                <motion.div
+                  className="portfolio-item glass-card h-full"
+                  whileHover={{ y: -10, scale: 1.015, transition: { duration: 0.3 } }}
+                >
+                  <div className="portfolio-item-image-box">
+                    <img src={item.image} alt={item.title} className="portfolio-item-img" />
+                    <div className="portfolio-item-icon-overlay">{item.icon}</div>
                   </div>
-                </div>
-              </motion.div>
+                  <div className="portfolio-item-info">
+                    <span className="portfolio-item-category">{item.category}</span>
+                    <h3 className="portfolio-item-title">{item.title}</h3>
+                    <p className="portfolio-item-description">{item.description}</p>
+                    <div className="portfolio-item-footer mt-auto">
+                      <button className="glass-button-sm pointer-events-none">View Details</button>
+                    </div>
+                  </div>
+                </motion.div>
+              </Link>
             </div>
           ))}
         </div>
