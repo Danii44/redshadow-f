@@ -105,36 +105,27 @@ export function ContactEnhanced() {
                 </div>
               </div>
 
-              <div className="contact-mini-grid">
-                <div className="contact-mini-card">
-                  <span>Projects</span>
-                  <strong>140+</strong>
-                </div>
-                <div className="contact-mini-card">
-                  <span>Delivery</span>
-                  <strong>4–8 days</strong>
-                </div>
-              </div>
+
 
               <div className="info-item">
                 <div className="info-icon">📍</div>
                 <div className="info-text">
                   <h4>Location</h4>
-                  <p>Silicon Valley, CA</p>
+                  <p>Islamabad, Pakistan</p>
                 </div>
               </div>
               <div className="info-item">
                 <div className="info-icon">📧</div>
                 <div className="info-text">
                   <h4>Email</h4>
-                  <a href="mailto:contact@redshadowdesigns.com">contact@redshadowdesigns.com</a>
+                  <a href="mailto:hello@redshadowdesigns.com">hello@redshadowdesigns.com</a>
                 </div>
               </div>
               <div className="info-item">
                 <div className="info-icon">📱</div>
                 <div className="info-text">
                   <h4>Phone</h4>
-                  <a href="tel:+15551234567">+1 (555) 123-4567</a>
+                  <a href="tel:+923338917021">+92 333 891 7021</a>
                 </div>
               </div>
 
