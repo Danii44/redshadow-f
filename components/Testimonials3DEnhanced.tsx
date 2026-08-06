@@ -140,17 +140,11 @@ export default function Testimonials3DEnhanced() {
       </div>
 
       <div className="absolute top-[8%] left-0 w-full text-center z-20 px-4">
-        <div className={`inline-block mb-3 px-4 py-1 rounded-full text-[0.66rem] uppercase tracking-[0.16em] font-semibold border ${
-          isLight ? 'border-[rgba(124,58,237,0.3)] bg-[rgba(124,58,237,0.08)] text-[#7c3aed]' : 'border-[rgba(0,212,255,0.3)] bg-[rgba(0,212,255,0.08)] text-[#a3f0ff]'
-        }`}>
+        <div className={`inline-block mb-3 px-4 py-1 rounded-full text-[0.66rem] uppercase tracking-[0.16em] font-semibold border ${isLight ? 'border-[rgba(124,58,237,0.3)] bg-[rgba(124,58,237,0.08)] text-[#7c3aed]' : 'border-[rgba(0,212,255,0.3)] bg-[rgba(0,212,255,0.08)] text-[#a3f0ff]'
+          }`}>
           Client Signal
         </div>
-        <h2 className="text-3xl md:text-5xl font-bold font-mono tracking-tight mb-3"
-          style={{
-            background: isLight ? 'linear-gradient(135deg, #3E325D 0%, #7c3aed 52%, #6366f1 100%)' : 'linear-gradient(135deg, #8bf4ff 0%, #7c3aed 52%, #26c8ff 100%)',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent'
-          }}>
+        <h2 className="text-3xl md:text-5xl font-bold font-mono tracking-tight mb-3">
           Proven Impact
         </h2>
         <p className={`max-w-2xl mx-auto text-xs md:text-sm leading-relaxed ${isLight ? 'text-[#3E325D]/80' : 'text-white/60'}`}>
