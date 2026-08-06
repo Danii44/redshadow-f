@@ -40,12 +40,10 @@
 }
 
 :root:not(.dark) .hero-overlay-top {
-  background: linear-gradient(
-    to bottom,
-    rgba(255, 255, 255, 0.85) 0%,
-    rgba(255, 255, 255, 0.2) 60%,
-    transparent 100%
-  ) !important;
+  background: linear-gradient(to bottom,
+      rgba(255, 255, 255, 0.85) 0%,
+      rgba(255, 255, 255, 0.2) 60%,
+      transparent 100%) !important;
 }
 
 :root:not(.dark) .hero-model-title {
@@ -107,7 +105,7 @@
    ABOUT SECTION
    ============================================================ */
 :root:not(.dark) .about-section {
-  background: linear-gradient(180deg, #f4f1f9 0%, #ede8f6 100%);
+  background: linear-gradient(180deg, #eae6f0 0%, #ede8f6 100%);
 }
 
 :root:not(.dark) .about-section::before {
@@ -797,6 +795,7 @@
 :root:not(.dark) div.bg-gradient-to-r.from-\[\#060912\] {
   background-image: linear-gradient(to right, #f4f1f9, transparent) !important;
 }
+
 :root:not(.dark) div.bg-gradient-to-l.from-\[\#060912\] {
   background-image: linear-gradient(to left, #f4f1f9, transparent) !important;
 }
@@ -813,7 +812,8 @@
   border-color: rgba(93, 75, 139, 0.2) !important;
   box-shadow: 0 30px 80px rgba(62, 50, 93, 0.15) !important;
 }
-:root:not(.dark) .aspect-video > div.bg-gradient-to-t {
+
+:root:not(.dark) .aspect-video>div.bg-gradient-to-t {
   background-image: linear-gradient(to top, rgba(244, 241, 249, 0.9), transparent) !important;
 }
 
@@ -821,10 +821,12 @@
 :root:not(.dark) section.border-t.border-\[rgba\(255\,255\,255\,0\.05\)\] {
   border-top-color: rgba(93, 75, 139, 0.15) !important;
 }
+
 :root:not(.dark) div.border.rounded-2xl {
   background-color: rgba(255, 255, 255, 0.75) !important;
   border-color: rgba(93, 75, 139, 0.18) !important;
 }
+
 :root:not(.dark) div.border.rounded-2xl.bg-\[\#0a0f1a\] {
   background-color: #ffffff !important;
   border-color: rgba(93, 75, 139, 0.4) !important;
@@ -846,6 +848,7 @@
 :root:not(.dark) .border-white\/10 {
   border-color: rgba(93, 75, 139, 0.18) !important;
 }
+
 :root:not(.dark) .border-white\/20 {
   border-color: rgba(93, 75, 139, 0.25) !important;
 }
@@ -854,6 +857,7 @@
 :root:not(.dark) .text-white {
   color: #1e1830 !important;
 }
+
 :root:not(.dark) .text-white\/60,
 :root:not(.dark) .text-white\/50,
 :root:not(.dark) .text-white\/40,
@@ -918,7 +922,7 @@
   background-image: linear-gradient(to top, rgba(244, 241, 249, 0.92) 0%, rgba(244, 241, 249, 0.2) 60%, transparent 100%) !important;
 }
 
-:root:not(.dark) .bg-gradient-to-b.from-[#02040a] {
+:root:not(.dark) .bg-gradient-to-b.from-\[\#02040a\] {
   background-image: linear-gradient(to bottom, rgba(244, 241, 249, 0.4) 0%, rgba(244, 241, 249, 0.95) 100%) !important;
 }
 
@@ -965,12 +969,10 @@
 
 /* The dark to-transparent gradient on portfolio card images */
 :root:not(.dark) .bg-gradient-to-t.from-black\/90 {
-  background-image: linear-gradient(
-    to top,
-    rgba(244, 241, 249, 0.9) 0%,
-    rgba(244, 241, 249, 0.1) 50%,
-    transparent 100%
-  ) !important;
+  background-image: linear-gradient(to top,
+      rgba(244, 241, 249, 0.9) 0%,
+      rgba(244, 241, 249, 0.1) 50%,
+      transparent 100%) !important;
 }
 
 /* Portfolio card outer container */
@@ -1034,12 +1036,10 @@
 
 /* Image gradient overlay — replace dark with light in light mode */
 :root:not(.dark) .portfolio-img-overlay {
-  background-image: linear-gradient(
-    to top,
-    rgba(244, 241, 249, 0.85) 0%,
-    rgba(244, 241, 249, 0.08) 50%,
-    transparent 100%
-  ) !important;
+  background-image: linear-gradient(to top,
+      rgba(244, 241, 249, 0.85) 0%,
+      rgba(244, 241, 249, 0.08) 50%,
+      transparent 100%) !important;
 }
 
 /* Card text in light mode */
@@ -1089,36 +1089,32 @@
 
 /* Dark mode hero overlay */
 .page-hero-overlay {
-  background: linear-gradient(to top, #060912 0%, rgba(6,9,18,0.6) 50%, transparent 100%);
+  background: linear-gradient(to top, #060912 0%, rgba(6, 9, 18, 0.6) 50%, transparent 100%);
 }
 
 /* Light mode hero overlay */
 :root:not(.dark) .page-hero-overlay {
-  background: linear-gradient(
-    to top,
-    rgba(244, 241, 249, 0.95) 0%,
-    rgba(244, 241, 249, 0.4) 55%,
-    transparent 100%
-  ) !important;
+  background: linear-gradient(to top,
+      rgba(244, 241, 249, 0.95) 0%,
+      rgba(244, 241, 249, 0.4) 55%,
+      transparent 100%) !important;
 }
 
 /* Services page background image card overlay */
 .photo-card-overlay {
-  background: linear-gradient(to top right, rgba(0,0,0,0.8), transparent, rgba(124,58,237,0.2));
+  background: linear-gradient(to top right, rgba(0, 0, 0, 0.8), transparent, rgba(124, 58, 237, 0.2));
 }
 
 :root:not(.dark) .photo-card-overlay {
-  background: linear-gradient(
-    to top right,
-    rgba(244, 241, 249, 0.5),
-    transparent,
-    rgba(124,58,237,0.08)
-  ) !important;
+  background: linear-gradient(to top right,
+      rgba(244, 241, 249, 0.5),
+      transparent,
+      rgba(124, 58, 237, 0.08)) !important;
 }
 
 /* Services page cinematic hero overlay */
 .page-hero-overlay.services-hero {
-  background: linear-gradient(to bottom, rgba(2,4,10,0.1) 0%, rgba(2,4,10,0.8) 60%, rgba(2,4,10,1) 100%);
+  background: linear-gradient(to bottom, rgba(2, 4, 10, 0.1) 0%, rgba(2, 4, 10, 0.8) 60%, rgba(2, 4, 10, 1) 100%);
 }
 
 /* Detail page text colors */
