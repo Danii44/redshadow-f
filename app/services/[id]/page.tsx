@@ -36,15 +36,15 @@ export default async function ServicePage({ params }: { params: Promise<{ id: st
   const title = id.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
 
   return (
-    <div className="min-h-screen bg-[#060912] pb-24">
+    <div className="page-detail-shell min-h-screen pb-24">
       {/* Cinematic Hero */}
-      <div className="relative w-full h-[60vh] md:h-[75vh] overflow-hidden bg-[#0a0a0a]">
+      <div className="page-detail-hero relative w-full h-[60vh] md:h-[75vh] overflow-hidden">
         <img 
           src="https://images.unsplash.com/photo-1614729939124-03290b56c9ce?q=80&w=2574&auto=format&fit=crop" 
           alt={title}
           className="absolute inset-0 w-full h-full object-cover opacity-40 mix-blend-lighten"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#060912] via-[#060912]/60 to-transparent" />
+        <div className="page-hero-overlay absolute inset-0" />
         
         <div className="absolute inset-0 flex flex-col justify-end max-w-7xl mx-auto px-6 lg:px-8 pb-16 md:pb-24">
           <Link href="/services" className="inline-flex items-center gap-2 text-[#00d4ff] hover:text-white transition-colors mb-8 font-mono text-sm uppercase tracking-widest w-fit">

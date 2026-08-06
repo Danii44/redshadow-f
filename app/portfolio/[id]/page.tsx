@@ -42,15 +42,15 @@ export default async function PortfolioProjectPage({ params }: { params: Promise
   const title = id.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
 
   return (
-    <div className="min-h-screen bg-[#060912] pb-24">
+    <div className="page-detail-shell min-h-screen pb-24">
       {/* Cinematic Hero */}
-      <div className="relative w-full h-[70vh] md:h-[85vh] overflow-hidden bg-[#0a0a0a]">
+      <div className="page-detail-hero relative w-full h-[70vh] md:h-[85vh] overflow-hidden">
         <img 
           src="https://images.unsplash.com/photo-1532981358914-7221b2bbbaaa?q=80&w=2670&auto=format&fit=crop" 
           alt={title}
-          className="absolute inset-0 w-full h-full object-cover opacity-60 mix-blend-lighten"
+          className="absolute inset-0 w-full h-full object-cover opacity-60"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#060912] via-[#060912]/40 to-transparent" />
+        <div className="page-hero-overlay absolute inset-0" />
         
         <div className="absolute inset-0 flex flex-col justify-end max-w-7xl mx-auto px-6 lg:px-8 pb-16 md:pb-24">
           <Link href="/#portfolio" className="inline-flex items-center gap-2 text-[#00d4ff] hover:text-white transition-colors mb-8 font-mono text-sm uppercase tracking-widest w-fit">
@@ -71,7 +71,7 @@ export default async function PortfolioProjectPage({ params }: { params: Promise
             </div>
             <div>
               <p className="text-white/40 text-sm font-mono uppercase mb-1">Services</p>
-              <p className="text-white font-semibold">CAD & 3D Render</p>
+              <p className="text-white font-semibold">CAD &amp; 3D Render</p>
             </div>
             <div>
               <p className="text-white/40 text-sm font-mono uppercase mb-1">Industry</p>
@@ -110,11 +110,11 @@ export default async function PortfolioProjectPage({ params }: { params: Promise
 
         {/* Image Gallery Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-8">
-          <div className="aspect-[4/3] rounded-3xl overflow-hidden bg-[#0a0a0a]">
-             <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=2670&auto=format&fit=crop" alt="Detail 1" className="w-full h-full object-cover opacity-70 mix-blend-lighten hover:scale-105 transition-transform duration-700" />
+          <div className="aspect-[4/3] rounded-3xl overflow-hidden detail-gallery-cell">
+             <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=2670&auto=format&fit=crop" alt="Detail 1" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
           </div>
-          <div className="aspect-[4/3] rounded-3xl overflow-hidden bg-[#0a0a0a]">
-             <img src="https://images.unsplash.com/photo-1503694978374-8a2fa686963a?q=80&w=2669&auto=format&fit=crop" alt="Detail 2" className="w-full h-full object-cover opacity-70 mix-blend-lighten hover:scale-105 transition-transform duration-700" />
+          <div className="aspect-[4/3] rounded-3xl overflow-hidden detail-gallery-cell">
+             <img src="https://images.unsplash.com/photo-1503694978374-8a2fa686963a?q=80&w=2669&auto=format&fit=crop" alt="Detail 2" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
           </div>
         </div>
 

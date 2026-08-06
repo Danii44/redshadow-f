@@ -26,22 +26,23 @@ function Model({ url, isLight }: { url: string; isLight: boolean }) {
 
       if (isLight) {
         if ('color' in nextMaterial) {
-          (nextMaterial as THREE.MeshStandardMaterial).color = new THREE.Color('#6366f1');
+          // Medium periwinkle-purple matching the reference watch colour
+          (nextMaterial as THREE.MeshStandardMaterial).color = new THREE.Color('#7c74b0');
         }
         if ('emissive' in nextMaterial) {
-          (nextMaterial as THREE.MeshStandardMaterial).emissive = new THREE.Color('#a78bfa');
+          (nextMaterial as THREE.MeshStandardMaterial).emissive = new THREE.Color('#6d65a0');
         }
         if ('emissiveIntensity' in nextMaterial) {
-          (nextMaterial as THREE.MeshStandardMaterial).emissiveIntensity = 0.25;
+          (nextMaterial as THREE.MeshStandardMaterial).emissiveIntensity = 0.04;
         }
         if ('metalness' in nextMaterial) {
-          (nextMaterial as THREE.MeshStandardMaterial).metalness = 0.65;
+          (nextMaterial as THREE.MeshStandardMaterial).metalness = 0.0;
         }
         if ('roughness' in nextMaterial) {
-          (nextMaterial as THREE.MeshStandardMaterial).roughness = 0.25;
+          (nextMaterial as THREE.MeshStandardMaterial).roughness = 0.82;
         }
         if ('envMapIntensity' in nextMaterial) {
-          (nextMaterial as THREE.MeshStandardMaterial).envMapIntensity = 2.0;
+          (nextMaterial as THREE.MeshStandardMaterial).envMapIntensity = 0.6;
         }
       } else {
         if ('color' in nextMaterial) {
@@ -156,43 +157,48 @@ export function GLBModelViewer() {
   const isMobileDevice = typeof window !== 'undefined' && window.innerWidth < 768;
 
   return (
-    <div className="h-full w-full overflow-hidden">
+    <div style={{ height: '100%', width: '100%', overflow: 'hidden', background: 'transparent' }}>
       <Canvas
         camera={{ position: [0, 0, 4], fov: 42 }}
         dpr={isMobileDevice ? [1, 1] : [1, 1.5]}
         shadows={!isMobileDevice}
         tabIndex={-1}
-        gl={{ antialias: !isMobileDevice, alpha: true, powerPreference: 'high-performance' }}
+        gl={{ antialias: !isMobileDevice, alpha: true, powerPreference: 'high-performance', premultipliedAlpha: false }}
         style={{
           width: '100%',
           height: '100%',
-          background: isLight ? 'transparent' : 'linear-gradient(135deg, #0a0a0a 0%, #1a0033 100%)',
+          background: 'transparent',
+          display: 'block',
         }}
         onCreated={(state) => {
-          state.gl.setClearColor(isLight ? 0x000000 : 0x09010f, isLight ? 0 : 1);
+          // Fully transparent canvas — background comes entirely from CSS
+          state.gl.setClearColor(new THREE.Color(0x000000), 0);
           state.gl.setPixelRatio(isMobileDevice ? 1 : Math.min(window.devicePixelRatio, 1.5));
-          state.gl.domElement.tabIndex = -1;
-          state.gl.domElement.style.border = 'none';
-          state.gl.domElement.style.outline = 'none';
-          state.gl.domElement.style.boxShadow = 'none';
+          const el = state.gl.domElement;
+          el.tabIndex = -1;
+          el.style.border = 'none';
+          el.style.outline = 'none';
+          el.style.boxShadow = 'none';
+          el.style.background = 'transparent';
         }}
       >
         <Suspense fallback={null}>
-          {/* Higher speed on mobile so touch drag feels snappy and responsive */}
           <PresentationControls speed={isMobileDevice ? 3.5 : 1.5} global zoom={1} rotation={[0, 0, 0]}>
             <Model url={modelUrl} isLight={isLight} />
           </PresentationControls>
 
-          <ambientLight intensity={isLight ? 1.8 : 0.95} color={isLight ? '#ffffff' : '#c9d9ff'} />
-          <hemisphereLight intensity={isLight ? 1.4 : 1.05} color={isLight ? '#ffffff' : '#a7e4ff'} groundColor={isLight ? '#e0e0ff' : '#06070a'} />
-          <directionalLight position={[10, 12, 6]} intensity={isLight ? 3.2 : 2.4} castShadow color="#ffffff" />
-          <spotLight position={[-6, 10, 10]} angle={0.45} penumbra={1} intensity={isLight ? 3.5 : 3.0} color={isLight ? '#8b5cf6' : '#00c8ff'} />
-          <pointLight position={[-12, -5, -5]} intensity={isLight ? 1.8 : 1.35} color={isLight ? '#a855f7' : '#00c8ff'} />
-          <pointLight position={[12, -6, -5]} intensity={isLight ? 2.0 : 1.45} color={isLight ? '#6366f1' : '#7c3aed'} />
+          {/* Balanced studio lighting for light mode */}
+          <ambientLight intensity={isLight ? 1.6 : 0.95} color={isLight ? '#f0ecff' : '#c9d9ff'} />
+          <hemisphereLight intensity={isLight ? 1.2 : 1.05} color={isLight ? '#e8e0ff' : '#a7e4ff'} groundColor={isLight ? '#d4c8f0' : '#06070a'} />
+          <directionalLight position={[5, 8, 5]} intensity={isLight ? 2.0 : 2.4} castShadow color="#ffffff" />
+          <directionalLight position={[-5, 4, -3]} intensity={isLight ? 0.8 : 0.6} color={isLight ? '#ddd6fe' : '#3b0764'} />
+          <spotLight position={[0, 10, 6]} angle={0.5} penumbra={0.8} intensity={isLight ? 1.8 : 3.0} color={isLight ? '#ffffff' : '#00c8ff'} />
+          <pointLight position={[-8, -3, -4]} intensity={isLight ? 0.5 : 1.35} color={isLight ? '#a5b4fc' : '#00c8ff'} />
 
           <Environment preset={isLight ? "apartment" : "city"} />
 
-          <ContactShadows position={[0, -1.45, 0]} opacity={isLight ? 0.25 : 0.45} scale={12} blur={2.5} />
+          {/* Soft floor shadow */}
+          <ContactShadows position={[0, -1.45, 0]} opacity={isLight ? 0.28 : 0.45} scale={14} blur={isLight ? 4.0 : 2.5} far={isLight ? 3.0 : 2} />
         </Suspense>
       </Canvas>
     </div>

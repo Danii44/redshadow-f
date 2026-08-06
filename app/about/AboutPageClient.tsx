@@ -184,8 +184,7 @@ export default function AboutPageClient() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
-            className="relative rounded-3xl overflow-hidden border border-[rgba(0,212,255,0.2)] p-10 md:p-16 text-center"
-            style={{ background: 'linear-gradient(135deg, #050810 0%, #0d0520 100%)' }}
+            className="relative rounded-3xl overflow-hidden border border-[rgba(0,212,255,0.2)] p-10 md:p-16 text-center glass-card fiverr-cta-card"
           >
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[500px] h-32 bg-[rgba(0,212,255,0.06)] blur-[60px] rounded-full pointer-events-none" />
             <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[500px] h-32 bg-[rgba(124,58,237,0.08)] blur-[60px] rounded-full pointer-events-none" />

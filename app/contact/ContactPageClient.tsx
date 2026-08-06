@@ -42,15 +42,16 @@ export default function ContactPageClient() {
         {/* Contact Form & Info Section */}
         <ContactEnhanced />
 
-        {/* Full-Width Dark Map (Shifted after Contact Form & Info) */}
-        <div className="w-full h-[45vh] md:h-[55vh] relative border-t border-white/10 overflow-hidden mt-16">
-          <div className="absolute top-0 left-0 right-0 h-16 bg-gradient-to-b from-[#02040a] to-transparent z-10 pointer-events-none" />
-          <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-[#02040a] to-transparent z-10 pointer-events-none" />
+        {/* Full-Width Map */}
+        <div className="map-section w-full h-[45vh] md:h-[55vh] relative border-t border-white/10 overflow-hidden mt-16">
+          <div className="map-fade-top absolute top-0 left-0 right-0 h-16 z-10 pointer-events-none" />
+          <div className="map-fade-bottom absolute bottom-0 left-0 right-0 h-16 z-10 pointer-events-none" />
           <iframe
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d212872.0831904165!2d72.9831059!3d33.6844202!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38dfbfd07891722f%3A0x6789d6d4a4c6e3f!2sIslamabad%2C%20Islamabad%20Capital%20Territory%2C%20Pakistan!5e0!3m2!1sen!2s!4v1722000000000!5m2!1sen!2s"
             width="100%"
             height="100%"
-            style={{ border: 0, filter: 'invert(90%) hue-rotate(180deg) brightness(85%) contrast(90%)' }}
+            className="map-iframe"
+            style={{ border: 0 }}
             allowFullScreen={false}
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"

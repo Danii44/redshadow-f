@@ -24,26 +24,26 @@
    ============================================================ */
 :root:not(.dark) .hero-model-section {
   background:
-    radial-gradient(circle at 50% 20%, rgba(93, 75, 139, 0.25), transparent 40%),
-    radial-gradient(circle at 50% 70%, rgba(62, 50, 93, 0.20), transparent 50%),
-    linear-gradient(180deg, #3E325D 0%, #2A2142 60%, #1E1830 100%) !important;
+    radial-gradient(circle at 50% 25%, rgba(124, 58, 237, 0.08), transparent 45%),
+    radial-gradient(circle at 50% 75%, rgba(99, 102, 241, 0.06), transparent 50%),
+    linear-gradient(180deg, #ffffff 0%, #f6f4fa 50%, #eae6f5 100%) !important;
 }
 
 :root:not(.dark) .hero-background-glow {
   background:
-    radial-gradient(circle at 40% 30%, rgba(208, 201, 226, 0.15), transparent 25%),
-    radial-gradient(circle at 75% 60%, rgba(223, 215, 244, 0.12), transparent 30%);
+    radial-gradient(circle at 40% 30%, rgba(167, 139, 250, 0.12), transparent 30%),
+    radial-gradient(circle at 75% 60%, rgba(192, 132, 252, 0.1), transparent 35%);
 }
 
 :root:not(.dark) .hero-model-section::after {
-  background: linear-gradient(180deg, rgba(30, 24, 48, 0) 0%, rgba(244, 241, 249, 1) 100%) !important;
+  background: linear-gradient(180deg, rgba(234, 230, 245, 0) 0%, rgba(244, 241, 249, 1) 100%) !important;
 }
 
 :root:not(.dark) .hero-overlay-top {
   background: linear-gradient(
     to bottom,
-    rgba(30, 24, 48, 0.6) 0%,
-    rgba(30, 24, 48, 0.2) 50%,
+    rgba(255, 255, 255, 0.85) 0%,
+    rgba(255, 255, 255, 0.2) 60%,
     transparent 100%
   ) !important;
 }
@@ -880,4 +880,318 @@
   background-image: linear-gradient(to right, #5D4B8B, #3E325D) !important;
   -webkit-background-clip: text !important;
   -webkit-text-fill-color: transparent !important;
+}
+
+/* ============================================================
+   PAGE SHELL, FIVERR SECTIONS & IMAGE OVERLAY FIXES
+   ============================================================ */
+:root:not(.dark) .homepage-shell {
+  background-color: #f4f1f9 !important;
+  color: #1e1830 !important;
+}
+
+/* Hardcoded dark backgrounds in page sections */
+:root:not(.dark) .bg-black\/40,
+:root:not(.dark) .bg-black\/70,
+:root:not(.dark) .bg-black\/80,
+:root:not(.dark) .bg-black\/90,
+:root:not(.dark) div[style*="background: #020509"],
+:root:not(.dark) div[style*="#020509"] {
+  background-color: rgba(255, 255, 255, 0.9) !important;
+  border-color: rgba(93, 75, 139, 0.18) !important;
+  color: #1e1830 !important;
+}
+
+/* Fiverr CTA section card background */
+:root:not(.dark) div[style*="linear-gradient(135deg, #050810"],
+:root:not(.dark) div[style*="#050810"] {
+  background: linear-gradient(135deg, #ffffff 0%, #f4f1f9 100%) !important;
+  border-color: rgba(93, 75, 139, 0.22) !important;
+  box-shadow: 0 20px 60px rgba(62, 50, 93, 0.12) !important;
+}
+
+/* Dark gradient overlays on background images -> Light gradient overlays */
+:root:not(.dark) .bg-gradient-to-b.from-\[\#02040a\]\/10,
+:root:not(.dark) .bg-gradient-to-b.from-\[\#02040a\],
+:root:not(.dark) .bg-gradient-to-t.from-black\/80,
+:root:not(.dark) .bg-gradient-to-t.from-black {
+  background-image: linear-gradient(to top, rgba(244, 241, 249, 0.92) 0%, rgba(244, 241, 249, 0.2) 60%, transparent 100%) !important;
+}
+
+:root:not(.dark) .bg-gradient-to-b.from-[#02040a] {
+  background-image: linear-gradient(to bottom, rgba(244, 241, 249, 0.4) 0%, rgba(244, 241, 249, 0.95) 100%) !important;
+}
+
+/* Borders in light mode */
+:root:not(.dark) .border-white\/5,
+:root:not(.dark) .border-white\/10,
+:root:not(.dark) .border-white\/20 {
+  border-color: rgba(93, 75, 139, 0.16) !important;
+}
+
+/* Badges & tags in light mode */
+:root:not(.dark) .bg-white\/5 {
+  background-color: rgba(93, 75, 139, 0.08) !important;
+  border-color: rgba(93, 75, 139, 0.18) !important;
+  color: #3E325D !important;
+}
+
+/* ============================================================
+   FIVERR CTA CARD — Light Mode
+   ============================================================ */
+:root:not(.dark) .fiverr-cta-card {
+  background: linear-gradient(135deg, #ffffff 0%, #f4f1f9 100%) !important;
+  border-color: rgba(93, 75, 139, 0.22) !important;
+  box-shadow: 0 20px 60px rgba(62, 50, 93, 0.10) !important;
+}
+
+/* glass-card base for light mode */
+:root:not(.dark) .glass-card {
+  background: rgba(255, 255, 255, 0.92) !important;
+  border-color: rgba(93, 75, 139, 0.18) !important;
+  box-shadow: 0 16px 48px rgba(62, 50, 93, 0.09) !important;
+}
+
+/* Text inside fiverr/glass cards */
+:root:not(.dark) .fiverr-cta-card .text-white\/30,
+:root:not(.dark) .fiverr-cta-card .text-white\/40,
+:root:not(.dark) .fiverr-cta-card .text-white\/60 {
+  color: rgba(30, 24, 48, 0.55) !important;
+}
+
+/* ============================================================
+   PORTFOLIO PAGE — Remove dark image overlay in light mode
+   ============================================================ */
+
+/* The dark to-transparent gradient on portfolio card images */
+:root:not(.dark) .bg-gradient-to-t.from-black\/90 {
+  background-image: linear-gradient(
+    to top,
+    rgba(244, 241, 249, 0.9) 0%,
+    rgba(244, 241, 249, 0.1) 50%,
+    transparent 100%
+  ) !important;
+}
+
+/* Portfolio card outer container */
+:root:not(.dark) .bg-black\/40.backdrop-blur-sm,
+:root:not(.dark) div.bg-black\/40 {
+  background-color: #ffffff !important;
+  border-color: rgba(93, 75, 139, 0.16) !important;
+  box-shadow: 0 8px 28px rgba(62, 50, 93, 0.08) !important;
+}
+
+/* Portfolio card hover glow */
+:root:not(.dark) div:hover.bg-black\/40,
+:root:not(.dark) div.hover\:shadow-\[0_0_30px_rgba\(0\,212\,255\,0\.1\)\]:hover {
+  box-shadow: 0 12px 40px rgba(93, 75, 139, 0.15) !important;
+  border-color: rgba(93, 75, 139, 0.3) !important;
+}
+
+/* Category label inside portfolio cards */
+:root:not(.dark) .text-\[\#00d4ff\].font-mono {
+  color: #7c3aed !important;
+}
+
+/* Portfolio "View Project" text */
+:root:not(.dark) .text-\[\#00d4ff\].text-sm.font-medium {
+  color: #7c3aed !important;
+}
+
+/* Search input field */
+:root:not(.dark) input.bg-white\/5 {
+  background-color: #ffffff !important;
+  border-color: rgba(93, 75, 139, 0.2) !important;
+  color: #1e1830 !important;
+}
+
+:root:not(.dark) input.bg-white\/5::placeholder {
+  color: rgba(30, 24, 48, 0.4) !important;
+}
+
+/* Category filter pills */
+:root:not(.dark) button.bg-white\/5 {
+  background-color: rgba(93, 75, 139, 0.07) !important;
+  border-color: rgba(93, 75, 139, 0.18) !important;
+  color: rgba(30, 24, 48, 0.7) !important;
+}
+
+/* ============================================================
+   PORTFOLIO CARDS — Precise semantic-class overrides
+   ============================================================ */
+
+/* Card container */
+:root:not(.dark) .portfolio-card {
+  background: #ffffff !important;
+  border-color: rgba(93, 75, 139, 0.15) !important;
+  box-shadow: 0 6px 24px rgba(62, 50, 93, 0.07) !important;
+}
+
+:root:not(.dark) .portfolio-card:hover {
+  border-color: rgba(93, 75, 139, 0.3) !important;
+  box-shadow: 0 12px 40px rgba(93, 75, 139, 0.13) !important;
+}
+
+/* Image gradient overlay — replace dark with light in light mode */
+:root:not(.dark) .portfolio-img-overlay {
+  background-image: linear-gradient(
+    to top,
+    rgba(244, 241, 249, 0.85) 0%,
+    rgba(244, 241, 249, 0.08) 50%,
+    transparent 100%
+  ) !important;
+}
+
+/* Card text in light mode */
+:root:not(.dark) .portfolio-card h3 {
+  color: #1e1830 !important;
+}
+
+:root:not(.dark) .portfolio-card .group-hover\:text-\[\#00d4ff\] {
+  color: #7c3aed !important;
+}
+
+:root:not(.dark) .portfolio-card span.font-mono {
+  color: #7c3aed !important;
+}
+
+:root:not(.dark) .portfolio-card p {
+  color: rgba(30, 24, 48, 0.6) !important;
+}
+
+:root:not(.dark) .portfolio-card .text-\[\#00d4ff\] {
+  color: #7c3aed !important;
+}
+
+/* ============================================================
+   PAGE DETAIL SHELL — Service & Portfolio detail pages
+   ============================================================ */
+
+/* Dark mode base (always-on dark for detail pages) */
+.page-detail-shell {
+  background: #060912;
+  color: #ffffff;
+}
+
+.page-detail-hero {
+  background: #0a0a0a;
+}
+
+/* Light mode overrides */
+:root:not(.dark) .page-detail-shell {
+  background: #f4f1f9 !important;
+  color: #1e1830 !important;
+}
+
+:root:not(.dark) .page-detail-hero {
+  background: #e8e3f5 !important;
+}
+
+/* Dark mode hero overlay */
+.page-hero-overlay {
+  background: linear-gradient(to top, #060912 0%, rgba(6,9,18,0.6) 50%, transparent 100%);
+}
+
+/* Light mode hero overlay */
+:root:not(.dark) .page-hero-overlay {
+  background: linear-gradient(
+    to top,
+    rgba(244, 241, 249, 0.95) 0%,
+    rgba(244, 241, 249, 0.4) 55%,
+    transparent 100%
+  ) !important;
+}
+
+/* Services page background image card overlay */
+.photo-card-overlay {
+  background: linear-gradient(to top right, rgba(0,0,0,0.8), transparent, rgba(124,58,237,0.2));
+}
+
+:root:not(.dark) .photo-card-overlay {
+  background: linear-gradient(
+    to top right,
+    rgba(244, 241, 249, 0.5),
+    transparent,
+    rgba(124,58,237,0.08)
+  ) !important;
+}
+
+/* Services page cinematic hero overlay */
+.page-hero-overlay.services-hero {
+  background: linear-gradient(to bottom, rgba(2,4,10,0.1) 0%, rgba(2,4,10,0.8) 60%, rgba(2,4,10,1) 100%);
+}
+
+/* Detail page text colors */
+:root:not(.dark) .page-detail-shell h2 {
+  color: #1e1830 !important;
+}
+
+:root:not(.dark) .page-detail-shell .text-white\/70,
+:root:not(.dark) .page-detail-shell .text-white\/60 {
+  color: rgba(30, 24, 48, 0.7) !important;
+}
+
+:root:not(.dark) .page-detail-shell .text-white\/40 {
+  color: rgba(30, 24, 48, 0.5) !important;
+}
+
+:root:not(.dark) .page-detail-shell .text-white\/90,
+:root:not(.dark) .page-detail-shell .text-white\/80 {
+  color: rgba(30, 24, 48, 0.85) !important;
+}
+
+:root:not(.dark) .page-detail-shell .text-\[\#00d4ff\] {
+  color: #7c3aed !important;
+}
+
+:root:not(.dark) .page-detail-shell .border-white\/10 {
+  border-color: rgba(93, 75, 139, 0.16) !important;
+}
+
+/* Detail page image gallery cells */
+.detail-gallery-cell {
+  background: #0a0a0a;
+}
+
+:root:not(.dark) .detail-gallery-cell {
+  background: #e8e3f5 !important;
+  border-radius: 24px;
+}
+
+/* ============================================================
+   CONTACT PAGE MAP SECTION
+   ============================================================ */
+
+/* Dark mode fades matching dark bg */
+.map-fade-top {
+  background: linear-gradient(to bottom, #02040a, transparent);
+}
+
+.map-fade-bottom {
+  background: linear-gradient(to top, #02040a, transparent);
+}
+
+/* Light mode fades matching light bg */
+:root:not(.dark) .map-fade-top {
+  background: linear-gradient(to bottom, #f4f1f9, transparent) !important;
+}
+
+:root:not(.dark) .map-fade-bottom {
+  background: linear-gradient(to top, #f4f1f9, transparent) !important;
+}
+
+/* Dark mode map: invert to dark style */
+.map-iframe {
+  filter: invert(90%) hue-rotate(180deg) brightness(85%) contrast(90%);
+}
+
+/* Light mode map: show normal Google Maps colors */
+:root:not(.dark) .map-iframe {
+  filter: none !important;
+  opacity: 0.9;
+}
+
+/* Map section border */
+:root:not(.dark) .map-section {
+  border-color: rgba(93, 75, 139, 0.16) !important;
 }

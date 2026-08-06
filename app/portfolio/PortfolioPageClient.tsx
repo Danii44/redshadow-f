@@ -78,10 +78,10 @@ export default function PortfolioPageClient() {
                 {filtered.map((project, i) => (
                   <motion.div key={project.id} layout initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, scale: 0.95 }} transition={{ duration: 0.4, delay: i * 0.05 }} className="break-inside-avoid mb-6">
                     <Link href={`/portfolio/${project.id}`} className="block group">
-                      <div className="relative rounded-2xl overflow-hidden border border-white/10 bg-black/40 backdrop-blur-sm hover:border-[#00d4ff]/30 transition-all duration-500 hover:shadow-[0_0_30px_rgba(0,212,255,0.1)]">
+                      <div className="portfolio-card relative rounded-2xl overflow-hidden border border-white/10 bg-black/40 backdrop-blur-sm hover:border-[#00d4ff]/30 transition-all duration-500 hover:shadow-[0_0_30px_rgba(0,212,255,0.1)]">
                         <div className={`overflow-hidden ${project.size === 'large' ? 'h-64' : 'h-44'}`}>
                           <img src={project.image} alt={project.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-                          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
+                          <div className="portfolio-img-overlay absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
                         </div>
                         <div className="p-6">
                           <span className="text-[#00d4ff] font-mono text-xs uppercase tracking-widest mb-2 block">{project.category}</span>

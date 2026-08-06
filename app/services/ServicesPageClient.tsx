@@ -36,7 +36,7 @@ export default function ServicesPageClient() {
               alt="Services Background" 
               className="w-full h-full object-cover opacity-10 mix-blend-lighten"
             />
-            <div className="absolute inset-0 bg-gradient-to-b from-[#02040a]/10 via-[#02040a]/80 to-[#02040a]" />
+            <div className="page-hero-overlay absolute inset-0" />
           </div>
           
           <motion.div 
@@ -103,7 +103,7 @@ export default function ServicesPageClient() {
                 alt="Engineering Accuracy" 
                 className="w-full h-full object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-tr from-black/80 via-transparent to-[#7c3aed]/20" />
+              <div className="photo-card-overlay absolute inset-0" />
             </motion.div>
           </div>
         </section>
