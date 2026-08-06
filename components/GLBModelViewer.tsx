@@ -6,10 +6,13 @@ import { useGLTF, PresentationControls, Environment, ContactShadows } from '@rea
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 import * as THREE from 'three';
+import { useTheme } from '@/contexts/ThemeContext';
 
-gsap.registerPlugin(ScrollTrigger);
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
-function Model({ url }: { url: string }) {
+function Model({ url, isLight }: { url: string; isLight: boolean }) {
   const group = useRef<THREE.Group>(null);
   const { scene } = useGLTF(url);
   const { size } = useThree();
@@ -21,23 +24,44 @@ function Model({ url }: { url: string }) {
     const applyMaterialTone = (material: THREE.Material) => {
       const nextMaterial = material.clone();
 
-      if ('color' in nextMaterial) {
-        (nextMaterial as THREE.MeshStandardMaterial).color = new THREE.Color('#111319');
-      }
-      if ('emissive' in nextMaterial) {
-        (nextMaterial as THREE.MeshStandardMaterial).emissive = new THREE.Color('#05070d');
-      }
-      if ('emissiveIntensity' in nextMaterial) {
-        (nextMaterial as THREE.MeshStandardMaterial).emissiveIntensity = 0.18;
-      }
-      if ('metalness' in nextMaterial) {
-        (nextMaterial as THREE.MeshStandardMaterial).metalness = 0.96;
-      }
-      if ('roughness' in nextMaterial) {
-        (nextMaterial as THREE.MeshStandardMaterial).roughness = 0.18;
-      }
-      if ('envMapIntensity' in nextMaterial) {
-        (nextMaterial as THREE.MeshStandardMaterial).envMapIntensity = 1.4;
+      if (isLight) {
+        if ('color' in nextMaterial) {
+          (nextMaterial as THREE.MeshStandardMaterial).color = new THREE.Color('#6366f1');
+        }
+        if ('emissive' in nextMaterial) {
+          (nextMaterial as THREE.MeshStandardMaterial).emissive = new THREE.Color('#a78bfa');
+        }
+        if ('emissiveIntensity' in nextMaterial) {
+          (nextMaterial as THREE.MeshStandardMaterial).emissiveIntensity = 0.25;
+        }
+        if ('metalness' in nextMaterial) {
+          (nextMaterial as THREE.MeshStandardMaterial).metalness = 0.65;
+        }
+        if ('roughness' in nextMaterial) {
+          (nextMaterial as THREE.MeshStandardMaterial).roughness = 0.25;
+        }
+        if ('envMapIntensity' in nextMaterial) {
+          (nextMaterial as THREE.MeshStandardMaterial).envMapIntensity = 2.0;
+        }
+      } else {
+        if ('color' in nextMaterial) {
+          (nextMaterial as THREE.MeshStandardMaterial).color = new THREE.Color('#111319');
+        }
+        if ('emissive' in nextMaterial) {
+          (nextMaterial as THREE.MeshStandardMaterial).emissive = new THREE.Color('#05070d');
+        }
+        if ('emissiveIntensity' in nextMaterial) {
+          (nextMaterial as THREE.MeshStandardMaterial).emissiveIntensity = 0.18;
+        }
+        if ('metalness' in nextMaterial) {
+          (nextMaterial as THREE.MeshStandardMaterial).metalness = 0.96;
+        }
+        if ('roughness' in nextMaterial) {
+          (nextMaterial as THREE.MeshStandardMaterial).roughness = 0.18;
+        }
+        if ('envMapIntensity' in nextMaterial) {
+          (nextMaterial as THREE.MeshStandardMaterial).envMapIntensity = 1.4;
+        }
       }
 
       return nextMaterial;
@@ -60,7 +84,7 @@ function Model({ url }: { url: string }) {
     });
     
     return clonedScene;
-  }, [scene]);
+  }, [scene, isLight]);
 
   useEffect(() => {
     const trigger = ScrollTrigger.create({
@@ -99,8 +123,11 @@ function Model({ url }: { url: string }) {
 export function GLBModelViewer() {
   const [webglReady, setWebglReady] = useState(true);
   const [modelUrl] = useState('/assets/Hoodie.glb');
+  const [mounted, setMounted] = useState(false);
+  const { theme } = useTheme();
 
   useEffect(() => {
+    setMounted(true);
     try {
       const canvas = document.createElement('canvas');
       const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
@@ -112,12 +139,14 @@ export function GLBModelViewer() {
     }
   }, []);
 
+  const isLight = mounted && theme === 'light';
+
   if (!webglReady) {
     return (
-      <div className="flex h-full w-full items-center justify-center bg-[radial-gradient(circle_at_top,_#22073c,_#05050a)] text-cyan-300">
+      <div className={`flex h-full w-full items-center justify-center ${isLight ? 'bg-purple-50 text-purple-900' : 'bg-[radial-gradient(circle_at_top,_#22073c,_#05050a)] text-cyan-300'}`}>
         <div className="text-center">
-          <p className="text-sm uppercase tracking-[0.4em] text-cyan-300/80">3D preview unavailable</p>
-          <p className="mt-2 text-xs text-cyan-100/70">The browser could not initialize WebGL for the hero canvas.</p>
+          <p className="text-sm uppercase tracking-[0.4em]">3D preview unavailable</p>
+          <p className="mt-2 text-xs opacity-70">The browser could not initialize WebGL for the hero canvas.</p>
         </div>
       </div>
     );
@@ -134,9 +163,13 @@ export function GLBModelViewer() {
         shadows={!isMobileDevice}
         tabIndex={-1}
         gl={{ antialias: !isMobileDevice, alpha: true, powerPreference: 'high-performance' }}
-        style={{ width: '100%', height: '100%', background: 'linear-gradient(135deg, #0a0a0a 0%, #1a0033 100%)' }}
+        style={{
+          width: '100%',
+          height: '100%',
+          background: isLight ? 'transparent' : 'linear-gradient(135deg, #0a0a0a 0%, #1a0033 100%)',
+        }}
         onCreated={(state) => {
-          state.gl.setClearColor('#09010f');
+          state.gl.setClearColor(isLight ? 0x000000 : 0x09010f, isLight ? 0 : 1);
           state.gl.setPixelRatio(isMobileDevice ? 1 : Math.min(window.devicePixelRatio, 1.5));
           state.gl.domElement.tabIndex = -1;
           state.gl.domElement.style.border = 'none';
@@ -147,19 +180,19 @@ export function GLBModelViewer() {
         <Suspense fallback={null}>
           {/* Higher speed on mobile so touch drag feels snappy and responsive */}
           <PresentationControls speed={isMobileDevice ? 3.5 : 1.5} global zoom={1} rotation={[0, 0, 0]}>
-            <Model url={modelUrl} />
+            <Model url={modelUrl} isLight={isLight} />
           </PresentationControls>
 
-          <ambientLight intensity={0.95} color="#c9d9ff" />
-          <hemisphereLight intensity={1.05} color="#a7e4ff" groundColor="#06070a" />
-          <directionalLight position={[10, 12, 6]} intensity={2.4} castShadow color="#ffffff" />
-          <spotLight position={[-6, 10, 10]} angle={0.45} penumbra={1} intensity={3.0} color="#00c8ff" />
-          <pointLight position={[-12, -5, -5]} intensity={1.35} color="#00c8ff" />
-          <pointLight position={[12, -6, -5]} intensity={1.45} color="#7c3aed" />
+          <ambientLight intensity={isLight ? 1.8 : 0.95} color={isLight ? '#ffffff' : '#c9d9ff'} />
+          <hemisphereLight intensity={isLight ? 1.4 : 1.05} color={isLight ? '#ffffff' : '#a7e4ff'} groundColor={isLight ? '#e0e0ff' : '#06070a'} />
+          <directionalLight position={[10, 12, 6]} intensity={isLight ? 3.2 : 2.4} castShadow color="#ffffff" />
+          <spotLight position={[-6, 10, 10]} angle={0.45} penumbra={1} intensity={isLight ? 3.5 : 3.0} color={isLight ? '#8b5cf6' : '#00c8ff'} />
+          <pointLight position={[-12, -5, -5]} intensity={isLight ? 1.8 : 1.35} color={isLight ? '#a855f7' : '#00c8ff'} />
+          <pointLight position={[12, -6, -5]} intensity={isLight ? 2.0 : 1.45} color={isLight ? '#6366f1' : '#7c3aed'} />
 
-          <Environment preset="city" />
+          <Environment preset={isLight ? "apartment" : "city"} />
 
-          <ContactShadows position={[0, -1.45, 0]} opacity={0.45} scale={12} blur={2.5} />
+          <ContactShadows position={[0, -1.45, 0]} opacity={isLight ? 0.25 : 0.45} scale={12} blur={2.5} />
         </Suspense>
       </Canvas>
     </div>

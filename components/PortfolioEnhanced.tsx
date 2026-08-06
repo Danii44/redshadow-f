@@ -81,31 +81,37 @@ export function PortfolioEnhanced() {
     if (!section || !track) return;
 
     const ctx = gsap.context(() => {
-      const cards = gsap.utils.toArray<HTMLElement>('.portfolio-item-wrapper', track);
-      const containerWidth = window.innerWidth;
-      const distance = Math.max(track.scrollWidth - containerWidth * 0.76, 0);
-      const dragDistance = Math.max(distance + 300, 800);
+      const getScrollAmount = () => {
+        return Math.max(track.scrollWidth - window.innerWidth + 120, 0);
+      };
 
       gsap.set(track, {
         width: 'max-content',
         minWidth: 'max-content',
         x: 0,
+        willChange: 'transform',
+        force3D: true,
       });
 
+      const totalX = getScrollAmount();
+
       gsap.to(track, {
-        x: () => -distance,
+        x: () => -getScrollAmount(),
         ease: 'none',
+        force3D: true,
         scrollTrigger: {
           trigger: section,
           start: 'top top',
-          end: `+=${dragDistance}`,
-          scrub: 1,
+          end: () => `+=${getScrollAmount() + 300}`,
+          scrub: 0.8,
           pin: true,
           anticipatePin: 1,
           invalidateOnRefresh: true,
+          fastScrollEnd: true,
         },
       });
 
+      const cards = gsap.utils.toArray<HTMLElement>('.portfolio-item-wrapper', track);
       cards.forEach((card, index) => {
         const image = card.querySelector('.portfolio-item-img') as HTMLElement | null;
         if (!image) return;
@@ -113,19 +119,17 @@ export function PortfolioEnhanced() {
         gsap.fromTo(
           image,
           {
-            yPercent: index % 2 === 0 ? -10 : 8,
-            xPercent: index % 2 === 0 ? 4 : -4,
+            yPercent: index % 2 === 0 ? -6 : 6,
             scale: 1.05,
           },
           {
-            yPercent: index % 2 === 0 ? 4 : -4,
-            xPercent: index % 2 === 0 ? -4 : 4,
+            yPercent: index % 2 === 0 ? 6 : -6,
             scale: 1.12,
             ease: 'none',
             scrollTrigger: {
               trigger: section,
               start: 'top top',
-              end: 'bottom top',
+              end: () => `+=${getScrollAmount() + 300}`,
               scrub: true,
             },
           },
